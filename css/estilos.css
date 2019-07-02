@@ -1,0 +1,142 @@
+body {
+    background: #000;
+    font-family: 'Questrial', sans-serif;
+
+}
+
+.bg-black {
+    background: #000;
+}
+
+.dropdown-item {
+    color: #ffffff;
+}
+
+.contenedor {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.centrado {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+
+}
+
+.display-5 {
+    font-size: 20px;
+    font-weight: 900;
+
+}
+
+header {
+    margin-top: 75px;
+}
+
+.producto img {
+    width: 300px;
+    height: 300px;
+}
+
+.ct_item-activo {
+    color: #00ff00;
+}
+
+
+.card{
+    background: #000;
+    color: white;
+    
+}
+
+@media (min-width: 576px) {
+    .card-deck {
+        -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .card-deck .card {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex: 1 0 0%;
+        flex: 1 0 0%;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        margin-right: 10px;
+        margin-bottom: 0;
+        margin-left: 10px;
+        color: #fff;
+    }
+
+    .card-deck .card .card-title{
+        color: #00ff00;
+    } 
+}
+
+.collapsed{
+    color: #fff;
+}
+
+/*Formulario inicio y registro*/
+.login-box{
+    width: 280px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+  }
+  .login-box h1{
+    float: left;
+    font-size: 40px;
+    border-bottom: 6px solid #00ff00;
+    margin-bottom: 50px;
+    padding: 13px 0;
+  }
+  
+.textbox{
+    width: 100%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 8px 0;
+    border-bottom: 1px solid #00ff00;
+  }
+  .textbox i{
+    width: 26px;
+    float: left;
+    text-align: center;
+  }
+
+  .textbox input{
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 18px;
+    width: 80%;
+    float: left;
+    margin: 0 10px;
+  }
+
+  .nav-item a{
+      background: #000;
+      color: #fff;
+  }
+
+  textarea {
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 18px;
+    width: 80%;
+    float: left;
+    margin: 0 10px;
+  }
