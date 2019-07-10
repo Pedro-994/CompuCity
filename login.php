@@ -12,7 +12,9 @@
         <title>Login</title>
     </head>
 <body>
-
+    <?php
+        include("includes/navbar.php");
+    ?>
         <div class="login-box">
                 <h1>Iniciar sesion</h1>
                 <div class="textbox">
@@ -24,7 +26,12 @@
                   <input type="password" placeholder="Contraseña">
                 </div>
                 <input type="button" class="btn btn-block btn-outline-success" value="Iniciar sesion">
-              </div>
+        </div>
+
+        <?php
+        include("includes/footer.php");
+    ?>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
 </script>

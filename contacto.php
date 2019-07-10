@@ -14,7 +14,9 @@
 </head>
 
 <body>
-
+    <?php
+        include("includes/navbar.php");
+    ?>
     <!-- HOME -->
     <header>
         <div class="dark-overlay">
@@ -140,15 +142,9 @@
             </div>
         </div>
     </section>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 p-5">
-                    <p class="text-center">&copy; Copyright 2019 - City of Méx. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?php
+        include("includes/footer.php");
+    ?>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">

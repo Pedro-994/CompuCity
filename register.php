@@ -14,6 +14,9 @@
 </head>
 
 <body>
+    <?php
+        include("includes/navbar.php");
+    ?>
 
     <div class="login-box">
         <h1>Crear cuenta</h1>

@@ -15,6 +15,9 @@
 </head>
 
 <body>
+  <?php
+        include("includes/navbar.php");
+    ?>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
     <a class="navbar-brand mx-auto text-white " href="index.html" style="width: 100px;">Logo</a>
@@ -170,10 +173,9 @@
       </div>
     </div>
   </div>
-
-
-
-
+  <?php
+        include("includes/footer.php");
+    ?>
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfQH5MI5OoDLFr-oj5TxUAd2rr9nU3ico&libraries=places&callback=initAutocomplete"
     async defer></script>
