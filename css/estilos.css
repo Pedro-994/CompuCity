@@ -1,6 +1,7 @@
 body {
     background: #000;
-    font-family: 'Questrial', sans-serif;
+    color: white;
+    font-family: 'Roboto Condensed', sans-serif;
 
 }
 
@@ -38,8 +39,8 @@ header {
 }
 
 .producto img {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
 }
 
 .ct_item-activo {
@@ -53,12 +54,13 @@ header {
     
 }
 
-@media (min-width: 576px) {
+@media (min-width: 250px) {
     .card-deck {
         -ms-flex-flow: row wrap;
         flex-flow: row wrap;
         margin-right: -15px;
         margin-left: -15px;
+        text-align: center;
     }
 
     .card-deck .card {
@@ -76,6 +78,7 @@ header {
 
     .card-deck .card .card-title{
         color: #00ff00;
+        
     } 
 }
 
@@ -145,3 +148,21 @@ header {
 .nav-link a{
     background: transparent;
 }
+
+#content #cart .table tbody tr td img{
+    width: 60px;
+
+} 
+
+#content #cart .table tbody tr td input{
+    width: 50px;
+    text-align: right;
+} 
+#content #cart .table tbody tr td{
+    vertical-align: middle;
+
+} 
+#content #cart .table tfoot{
+    font-size: 20px;
+
+} 

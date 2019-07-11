@@ -1,144 +1,122 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/v4-shims.css">
 
 <body>
-    <!-- Footer -->
-    <footer class="page-footer font-small mdb-color lighten-3 pt-4">
+  <!-- Footer -->
+  <footer class="page-footer font-small">
 
-        <!-- Footer Links -->
-        <div class="container text-center text-md-left">
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left mt-5">
 
-            <!-- Grid row -->
-            <div class="row">
+      <!-- Grid row -->
+      <div class="row mt-3">
 
-                <!-- Grid column -->
-                <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 
-                    <!-- Content -->
-                    <h5 class="font-weight-bold text-uppercase mb-4">Footer Content</h5>
-                    <p>Here you can use rows and columns to organize your footer content.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit amet numquam iure provident
-                        voluptate
-                        esse
-                        quasi, veritatis totam voluptas nostrum.</p>
-
-                </div>
-                <!-- Grid column -->
-
-                <hr class="clearfix w-100 d-md-none">
-
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
-
-                    <!-- Links -->
-                    <h5 class="font-weight-bold text-uppercase mb-4">About</h5>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <p>
-                                <a href="#!">PROJECTS</a>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <a href="#!">ABOUT US</a>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <a href="#!">BLOG</a>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <a href="#!">AWARDS</a>
-                            </p>
-                        </li>
-                    </ul>
-
-                </div>
-                <!-- Grid column -->
-
-                <hr class="clearfix w-100 d-md-none">
-
-                <!-- Grid column -->
-                <div class="col-md-4 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
-
-                    <!-- Contact details -->
-                    <h5 class="font-weight-bold text-uppercase mb-4">Address</h5>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <p>
-                                <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-                        </li>
-                        <li>
-                            <p>
-                                <i class="fas fa-envelope mr-3"></i> info@example.com</p>
-                        </li>
-                        <li>
-                            <p>
-                                <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-                        </li>
-                        <li>
-                            <p>
-                                <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-                        </li>
-                    </ul>
-
-                </div>
-                <!-- Grid column -->
-
-                <hr class="clearfix w-100 d-md-none">
-
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 text-center mx-auto my-4">
-
-                    <!-- Social buttons -->
-                    <h5 class="font-weight-bold text-uppercase mb-4">Follow Us</h5>
-
-                    <!-- Facebook -->
-                    <a href="facebook.com">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <!-- Twitter -->
-                    <a href="twitter.com" class="btn-floating btn-tw">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <!-- Google +-->
-                    <a type="button" class="btn-floating btn-gplus">
-                        <i class="fab fa-google-plus-g"></i>
-                    </a>
-                    <!-- Dribbble -->
-                    <a type="button" class="btn-floating btn-dribbble">
-                        <i class="fab fa-dribbble"></i>
-                    </a>
-
-                </div>
-                <!-- Grid column -->
-
-            </div>
-            <!-- Grid row -->
+          <!-- Content -->
+          <h6 class="text-uppercase font-weight-bold">Paginas</h6>
+          <hr class="accent-2 mt-0 d-inline-block mx-auto" style="width: 60px;">
+          <ul>
+            <li><a href="http://" target="_blank" rel="noopener noreferrer"></a>Carrito de compra</li>
+            <li><a href="http://" target="_blank" rel="noopener noreferrer"></a>Tienda</li>
+            <li><a href="http://" target="_blank" rel="noopener noreferrer"></a>Contacto</li>
+            <li><a href="http://" target="_blank" rel="noopener noreferrer"></a>Mi cuenta</li>
+          </ul>
+          <h6 class="text-uppercase font-weight-bold">Usuario</h6>
+          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+          <ul>
+            <li><a href="http://" target="_blank" rel="noopener noreferrer"></a>Login</li>
+            <li><a href="http://" target="_blank" rel="noopener noreferrer"></a>Registro</li>
+          </ul>
 
         </div>
-        <!-- Footer Links -->
+        <!-- Grid column -->
 
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2018 Copyright:
-            <a href="http://compucity.co"> Compucity.co</a>
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+          <!-- Links -->
+          <h6 class="text-uppercase font-weight-bold">Products</h6>
+          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+          <p>
+            <a href="#!">Productos</a>
+          </p>
+          <p>
+            <a href="#!">Ensamble</a>
+          </p>
+          <p>
+            <a href="#!">Marcas</a>
+          </p>
+          <p>
+            <a href="#!">Acerca de</a>
+          </p>
+
         </div>
-        <!-- Copyright -->
+        <!-- Grid column -->
 
-    </footer>
-    <!-- Footer -->
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+          <!-- Links -->
+          <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+          <p>
+            <a href="#!">Tu cuenta</a>
+          </p>
+          <p>
+            <a href="#!">Registrate</a>
+          </p>
+          <p>
+            <a href="#!">Compras</a>
+          </p>
+          <p>
+            <a href="#!">Ayuda</a>
+          </p>
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+          <!-- Links -->
+          <h6 class="text-uppercase font-weight-bold">Contacto</h6>
+          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+          <p>
+            <i class="fas fa-home mr-3"></i> Mexico, Metepec, Mx</p>
+          <p>
+            <i class="fas fa-envelope mr-3"></i> info@example.com</p>
+          <p>
+            <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+          <p>
+            <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2019 Copyright:
+      <a href="http://compucity.co/"> compucity.co</a>
+    </div>
+    <!-- Copyright -->
+
+  </footer>
+  <!-- Footer -->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 </body>
-
-</html>
