@@ -122,16 +122,16 @@
                         <h2 class="text-white mt-3">Contacto</h2>
                         <div class="form-row">
                             <div class="form-group col-md-6 textbox">
-                                <input type="text" placeholder="Nombre(s) y Apellido(s)">
+                                <input type="text" placeholder="Nombre(s) y Apellido(s)" name="name" required>
                             </div>
                             <div class="form-group col-md-6 textbox">
-                                <input type="email" placeholder="Correo electronico">
+                                <input type="email" placeholder="Correo electronico" name="email" required>
                             </div>
                         </div>
                         <div class="form-group col-md-6 textbox">
-                            <input type="text" placeholder="Telefono">
+                            <input type="text" placeholder="Telefono" name="telefono" required>
                         </div>
-                        <textarea name="" id="" cols="100" rows="10" placeholder="Escribenos ..."></textarea>
+                        <textarea cols="100" rows="10" placeholder="Escribenos ..." name="mensaje" required></textarea>
                         <button type="submit" class="btn btn-block btn-outline-success">Enviar</button>
                     </div>
 

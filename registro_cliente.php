@@ -30,15 +30,15 @@
         <h1>Crear cuenta</h1>
         <div class="textbox">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username">
+            <input type="text" placeholder="Username" name="user" required>
         </div>
         <div class="textbox">
             <i class="fas fa-at"></i>
-            <input type="text" placeholder="Email">
+            <input type="text" placeholder="Email" name="email" required> 
         </div>
         <div class="textbox">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Contraseña">
+            <input type="password" placeholder="Contraseña" name="password" required>
         </div>
         <div class="textbox">
                 <i class="fas fa-lock"></i>

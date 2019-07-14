@@ -148,6 +148,9 @@ header {
 .nav-link a{
     background: transparent;
 }
+#content #cart .table{
+    color: #fff;
+}
 
 #content #cart .table tbody tr td img{
     width: 60px;
@@ -166,3 +169,7 @@ header {
     font-size: 20px;
 
 } 
+
+#MisPedidos .table {
+    color: #fff;
+}
