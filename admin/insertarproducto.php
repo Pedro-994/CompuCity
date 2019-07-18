@@ -34,6 +34,12 @@
                                 <input type="text" name="IDPRODUCTO" class="form-control" required>
                             </div>
                         </div>
+                        <div class="form-group row  justify-content-md-center">
+                            <label class="col-md-2">Nombre Producto</label>
+                            <div class="col-md-3">
+                                <input type="text" name="NOMBRE_P" class="form-control" required>
+                            </div>
+                        </div>
                         <div class="form-group row justify-content-md-center">
                             <label class="col-md-2">Categoria</label>
                             <div class="col-md-3">
@@ -55,12 +61,6 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row  justify-content-md-center">
-                            <label class="col-md-2">Nombre Producto</label>
-                            <div class="col-md-3">
-                                <input type="text" name="NOMBRE_P" class="form-control" required>
-                            </div>
-                        </div>
                         <div class="form-group row justify-content-md-center">
                             <label class="col-md-2">MARCA</label>
                             <div class="col-md-3">
@@ -79,6 +79,30 @@
                                 <input type="float" name="PRECIO" class="form-control" required>
                             </div>
                         </div>
+                        <div class="form-group row  justify-content-md-center">
+                            <label class="col-md-2">Imagen 1</label>
+                            <div class="col-md-3">
+                                <input type="file" name="img1" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row  justify-content-md-center">
+                            <label class="col-md-2">Imagen 2</label>
+                            <div class="col-md-3">
+                                <input type="file" name="img2" class="form-control" required>
+                            </div>
+                        </div>  
+                        <div class="form-group row  justify-content-md-center">
+                            <label class="col-md-2">Imagen 3</label>
+                            <div class="col-md-3">
+                                <input type="file" name="img3" class="form-control" required>
+                            </div>
+                        </div>  
+                        <div class="form-group row  justify-content-md-center">
+                            <label class="col-md-2">Imagen 4</label>
+                            <div class="col-md-3">
+                                <input type="file" name="img4" class="form-control" required>
+                            </div>
+                        </div>                          
                         <div class="form-group row justify-content-md-center">
                             <label class="col-md-2">Descripcion</label>
                             <div class="col-md-3">
@@ -119,7 +143,23 @@
         $precio = $_POST["PRECIO"];
         $$descripcion = $_POST["DESCRIPCION"];
 
-        $insertar_producto = "INSERT INTO `producto`(`IDPRODUCTO`, `IDCATEGORIA`, `NOMBRE_P`, `MARCA`, `CARACTERISTICAS`, `PRECIO`, `DESCRIPCION`) VALUES ($idproducto,$categoria,'$nombproducto','$marca','$caracteristica',$precio,'$descripcion')";
+        $img1 = $_FILES['img1']['name'];
+        $img2 = $_FILES['img2']['name'];
+        $img3 = $_FILES['img3']['name'];
+        $img4 = $_FILES['img4']['name'];
+
+        $name1_temp = $_FILES['img1']['tmp_name'];
+        $name2_temp = $_FILES['img2']['tmp_name'];
+        $name3_temp = $_FILES['img3']['tmp_name'];
+        $name4_temp = $_FILES['img4']['tmp_name'];
+
+        move_uploaded_file($name1_temp,"img_prod/$img1");
+        move_uploaded_file($name2_temp,"img_prod/$img2");
+        move_uploaded_file($name3_temp,"img_prod/$img3");
+        move_uploaded_file($name4_temp,"img_prod/$img4");
+     
+
+        $insertar_producto = "INSERT INTO producto(IDPRODUCTO,IDCATEGORIA,NOMBRE_P,MARCA,CARACTERISTICAS,PRECIO,DESCRIPCION,img1,img2,img3,img4) VALUES ($idproducto,$categoria,'$nombproducto','$marca','$caracteristica',$precio,'$descripcion','$img1','$img2','$img3','$img4')";
 
         $guardar_producto = mysqli_query($conexion,$insertar_producto);
 

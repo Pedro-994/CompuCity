@@ -23,10 +23,10 @@
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="card-body">
                     <div class="form-check">
-                        <a href="#" class="categoria" category="Chip-AMD">AMD</a>
+                        <a href="#" class="categoria" category="AMD">AMD</a>
                     </div>
                     <div class="form-check">
-                        <a href="#" class="categoria" category="Chip-Nvidia">Nvidia</a>
+                        <a href="#" class="categoria" category="nvidia">Nvidia</a>
                     </div>
                 </div>
             </div>

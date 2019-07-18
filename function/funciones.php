@@ -14,15 +14,17 @@
 
         while ($fila = mysqli_fetch_array($resultado_producto)){
 
-            $ID= $fila['IDPRODUCTO'];
+            $ID = $fila['IDPRODUCTO'];
             $nombre = $fila['NOMBRE_P'];
-            $precio= $fila['PRECIO'];
+            $precio = $fila['PRECIO'];
+            $marca = $fila['MARCA'];
+            $img = $fila['img1'];
 
             
-            echo "<div class='producto col-lg-4 col-md-6 col-sm-6 mb-4' category='Chip-Nvidia'>
+            echo "<div class='producto col-lg-4 col-md-6 col-sm-6 mb-4' category='$marca'>
             <div class='card align-items-center'>
                 <img class='card-img-top'
-                    src='../img/productos/Tarjetas de video/Aorus/2080/2080_aorus.png' alt=''>
+                    src='admin/img_prod/$img' alt=''>
                 <div class='card-body '>
                     <a href='/productos/Grafica/Aorus/2080/Aorus_2080.html'>
                         <h5 class='card-title'>$nombre</h5>
