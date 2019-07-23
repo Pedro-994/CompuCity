@@ -13,7 +13,12 @@
             <div class="col-12 col-md-9 ">
                 <!--Contenedor Productos-->
                 <div class="container-fluid">
-                    <p class="display-4 ">Tarjetas Grafica</p>
+                <?php
+                    if(!isset($_GET['id_cat'])){
+                        echo"<p class='display-4'>Todos los productos</p>"; 
+                    }
+                   
+                ?>
                     <section class="lista_productos mt-5">
                         <div class="card-deck justify-content-md-center">
                             <?php 

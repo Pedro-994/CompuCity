@@ -3,11 +3,13 @@
     include("function/funciones.php");
 ?>
 <?php
-$db = mysqli_connect("localhost","root","","compucity");
-    if(isset($_GET['id'])){
-        $idp = $_GET['pro_id'];
+    
+    if(isset($_GET['id_prod'])){
+        $id_prod = $_GET['id_prod'];
+
+        mysqli_set_charset($db,"utf8");
         
-        $get_p = "SELECT * FROM PRODUCTO WHERE IDPRODUCTO = $idp";
+        $get_p = "SELECT * FROM PRODUCTO WHERE IDPRODUCTO = $id_prod";
 
         $run_P = mysqli_query($db,$get_p);
 
@@ -15,7 +17,15 @@ $db = mysqli_connect("localhost","root","","compucity");
 
         $img1 = $row_p['img1'];
 
+        $img2 = $row_p['img2'];
+
+        $img3 = $row_p['img3'];
+
+        $img4 = $row_p['img4'];
+
         $name = $row_p['NOMBRE_P'];
+
+        $price = $row_p['PRECIO'];
 
     }
     

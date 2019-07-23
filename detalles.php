@@ -9,7 +9,6 @@
                 include("includes/sidebar.php");
               ?>
             </div>
-            <!--Fin productos-->
             <div class="col-12 col-md-9 ">
                 <div id="productMain" class="row">
                     <div class="col-sm-6">
@@ -19,16 +18,20 @@
                                     <li data-target="#carousel" data-slide-to="0" class="active"></li>
                                     <li data-target="#carousel" data-slide-to="1"></li>
                                     <li data-target="#carousel" data-slide-to="2"></li>
+                                    <li data-target="#carousel" data-slide-to="3"></li>
                                 </ol>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img class="d-block w-100" src="admin/img_prod/<?php echo $img1; ?>" alt="First slide">
                                     </div>
                                     <div class="carousel-item">
-                                        <img class="d-block w-100" src="base2080.png" alt="Second slide">
+                                        <img class="d-block w-100" src="admin/img_prod/<?php echo $img2; ?>" alt="Second slide">
                                     </div>
                                     <div class="carousel-item">
-                                        <img class="d-block w-100" src="comb2080.png" alt="Third slide">
+                                        <img class="d-block w-100" src="admin/img_prod/<?php echo $img3; ?>" alt="Third slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="admin/img_prod/<?php echo $img4; ?>" alt="Third slide">
                                     </div>
                                 </div>
                                 <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
@@ -44,9 +47,9 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="box">
-                            <h1 class="text-center"> <?php $name ?></h1>
-                            <form>
-                                <div class="form-group" action="detalles.php" method="POST">
+                            <h1 class="text-center"> <?php echo $name; ?></h1>
+                            <form action="details.php?add_cart=<?php echo $id_prod; ?>" method="post">
+                                <div class="form-group">
                                     <label for="" class="col-md-5 control-label">Cantidad</label>
                                     <div class="col-md-7">
                                         <select name="cantidad" id="" class="form-control">
@@ -58,25 +61,30 @@
                                         </select>
                                     </div>
                                 </div>
-                                <p class="price">$500</p>
+                                <p class="price">$ <?php echo $price; ?></p>
                                 <p class="text-center buttons"><button
                                         class="btn btn-success i fa fa-shopping-cart">Agregar a carrito</button></p>
                             </form>
                         </div>
                         <div class="row" id="thumbs">
-                            <div class="col-4">
-                                <a href="" class="thumb">
-                                    <img src="2080_aorus.png" alt="" class="img-fluid">
+                            <div class="col-3">
+                                <a href="admin/img_prod/<?php echo $img1; ?>" class="thumb" data-target="#myCarousel" data-slide-to="0">
+                                    <img src="admin/img_prod/<?php echo $img1; ?>" alt="" class="img-fluid">
                                 </a>
                             </div>
-                            <div class="col-4">
-                                <a href="" class="thumb">
-                                    <img src="base2080.png" alt="" class="img-fluid">
+                            <div class="col-3">
+                                <a href="admin/img_prod/<?php echo $img2; ?>" class="thumb" data-target="#myCarousel" data-slide-to="1">
+                                    <img src="admin/img_prod/<?php echo $img2; ?>" alt="" class="img-fluid">
                                 </a>
                             </div>
-                            <div class="col-4">
-                                <a href="" class="thumb">
-                                    <img src="cost2080.png" alt="" class="img-fluid">
+                            <div class="col-3">
+                                <a href="admin/img_prod/<?php echo $img3; ?>" class="thumb" data-target="#myCarousel" data-slide-to="2">
+                                    <img src="admin/img_prod/<?php echo $img3; ?>" alt="" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="col-3">
+                                <a href="admin/img_prod/<?php echo $img4; ?>" class="thumb" data-target="#myCarousel" data-slide-to="3">
+                                    <img src="admin/img_prod/<?php echo $img4; ?>" alt="" class="img-fluid">
                                 </a>
                             </div>
                         </div>
@@ -135,16 +143,15 @@
     </div>
     <script src="../js/jquery-3.4.1.js"></script>
     <script src="../js/script.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
