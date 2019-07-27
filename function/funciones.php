@@ -59,4 +59,96 @@
         }
     }
 
+    function nomcat(){
+        global $db;
+        if(isset($_GET['id_cat'])){
+
+            $p_cat_id = $_GET['id_cat'];
+            $get_p_cat ="SELECT * FROM CATEGORIA WHERE IDCATEGORIA = $p_cat_id";
+            $run_p_cat = mysqli_query($db,$get_p_cat);
+            $row_p_cat = mysqli_fetch_array($run_p_cat);
+            $p_cat_title = $row_p_cat['NOMBRECAT'];
+            $p_cat_desc = $row_p_cat['DESCRIPCIONCAT'];
+            $get_products ="SELECT * FROM PRODUCTO where IDCATEGORIA='$p_cat_id'";
+        
+        $run_products = mysqli_query($db,$get_products);
+            $count = mysqli_num_rows($run_products);
+            if($count==0){
+            
+                echo "
+                    <div 'class='display-4'>
+                    
+                        <h1> No se encontraron productos en esta categoria </h1>
+                    
+                    </div>
+                ";
+                
+            }else{
+                
+                echo "
+                
+                    <div 'class='display-4'>
+                    
+                        <h1> $p_cat_title </h1>
+                        
+                        <p> $p_cat_desc </p>
+                    
+                    </div>
+                
+                ";
+                
+            }
+        }
+
+
+    }
+    
+function getpcatpro(){
+    
+    global $db;
+    
+    if(isset($_GET['id_cat'])){
+
+        $p_cat_id = $_GET['id_cat'];
+        
+        $get_products ="SELECT * FROM PRODUCTO where IDCATEGORIA='$p_cat_id'";
+        
+        $run_products = mysqli_query($db,$get_products);
+        
+        while($fila=mysqli_fetch_array($run_products)){
+
+            $id_prod = $fila['IDPRODUCTO'];
+            $nombre = $fila['NOMBRE_P'];
+            $precio = $fila['PRECIO'];
+            $categoria = $fila['IDCATEGORIA'];
+            $img = $fila['img1'];
+
+            
+            echo "
+            
+            <div class='producto col-lg-4 col-md-6 col-sm-6 mb-4'>
+            <div class='card align-items-center'>
+                <img class='card-img-top'
+                    src='admin/img_prod/$img' alt=''>
+                <div class='card-body '>
+                    <a href='detalles.php?id_prod=$id_prod'>
+                        <h5 class='card-title'>$nombre</h5>
+                    </a>
+                    <p class='price'> $ $precio</p>
+                    <p class='button'>
+                        <a href='detalles.php?id_prod=$id_prod'
+                            class='btn btn-outline-success'>Detalles</a>
+                        <a href='detalles.php?id_prod$id_prod' class='btn btn-success'><i class='fas fa-cart-plus'>Agregar a
+                                Carrito</i>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>";            
+        }
+        
+    }
+    
+}
+
 ?>

@@ -14,15 +14,22 @@
                 <!--Contenedor Productos-->
                 <?php
                     if(!isset($_GET['id_cat'])){
-                        echo"<p class='display-4'>Todos los productos</p>"; 
+                        echo"<p class='display-4'>Todos los productos</p>";
                     }
+                    nomcat();
+                    
                 ?>
+                
                 <div class="container-fluid">
 
                     <section class="lista_productos mt-5">
                         <div class="card-deck justify-content-md-center">
-                            <?php 
-                                getPro(); 
+                            <?php
+                                 if(!isset($_GET['id_cat'])){
+                                     getPro();
+                                 }else{
+                                    getpcatpro();
+                                 } 
                             ?>
                         </div>
                     </section>
