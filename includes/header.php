@@ -34,18 +34,16 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/v4-shims.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap" rel="stylesheet">
-    <script src="../js/jquery-3.4.1.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="https://kit.fontawesome.com/75a823aec8.js"></script>
     <title>CompuCity</title>
-</head>
+  </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
@@ -61,15 +59,6 @@
                             class="fas fa-home"></i></a>
                 </li>
                 <li class="nav-item "><a href="../tienda.php" class="nav-link text-white">PRODUCTOS</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white " href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">DISEÑAR PC</a>
-                    <div class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Mejora tu PC</a>
-                        <a class="dropdown-item" href="#">Configurar PC desde cero</a>
-                    </div>
-                </li>
-                <li class="nav-item "><a href="../marcas.php" class="nav-link text-white">MARCAS</a></li>
                 <li class="nav-item "><a href="../nosotros.php" class="nav-link text-white">ACERCA DE</a></li>
                 <li class="nav-item "><a href="../contacto.php" class="nav-link text-white">CONTACTO</a></li>
             </ul>
@@ -102,3 +91,4 @@
             </div>
         </div>
     </nav>
+    
