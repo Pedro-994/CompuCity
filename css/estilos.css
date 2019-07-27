@@ -43,9 +43,6 @@ header {
     height: 250px;
 }
 
-.ct_item-activo {
-    color: #00ff00;
-}
 
 .card{
     background: #000;
@@ -79,10 +76,6 @@ header {
         color: #00ff00;
         
     } 
-}
-
-.collapsed{
-    color: #fff;
 }
 
 /*Formulario inicio y registro*/
@@ -126,12 +119,6 @@ header {
     float: left;
     margin: 0 10px;
   }
-
-  .nav-item a{
-      background: #000;
-      color: #fff;
-  }
-
   textarea {
     border: none;
     outline: none;

@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 
     $('.lista-categoria .categoria[category="all"]').addClass('ct_item-activo');
@@ -19,4 +18,3 @@ $(document).ready(function(){
         $('.producto').show();
     });
 });
-
