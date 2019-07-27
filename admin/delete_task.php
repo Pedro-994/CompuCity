@@ -7,10 +7,9 @@ if(isset($_GET['id'])) {
   $query = "DELETE FROM producto WHERE IDPRODUCTO = $id";
   $result = mysqli_query($conexion, $query);
   if(!$result) {
-    die("Query Failed.");
+    die("Consulta fallida.");
   }
-
-  $_SESSION['message'] = 'Task Removed Successfully';
+  $_SESSION['message'] = 'Registro eliminado';
   $_SESSION['message_type'] = 'danger';
   header('Location: index.php');
 }

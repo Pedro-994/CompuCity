@@ -5,12 +5,13 @@ $precio= '';
 
 if  (isset($_GET['id'])) {
   $id = $_GET['id'];
-  $query = "SELECT * FROM PRODUCTO WHERE IDPRODUCTO=$id";
+  $query = "SELECT * FROM PRODUCTO WHERE IDPRODUCTO = $id";
   $result = mysqli_query($conexion, $query);
-  if (mysqli_num_rows($result) == 1) {
+  if (mysqli_num_rows($result)) {
     $row = mysqli_fetch_array($result);
     $nombre = $row['NOMBRE_P'];
     $precio = $row['PRECIO'];
+    $stock = $row['CANTIDAD_ALMACEN'];
   }
 }
 
@@ -19,7 +20,7 @@ if (isset($_POST['update'])) {
   $nombre = $_POST['NOMBRE_P'];
   $precio = $_POST['PRECIO'];
 
-  $query = "UPDATE PRODUCTO set NOMBRE_P = $nombre, PRECIO = $precio WHERE IDPRODUCTO=$id";
+  $query = "UPDATE PRODUCTO set NOMBRE_P = '$nombre', PRECIO = $precio WHERE IDPRODUCTO=$id";
   mysqli_query($conexion, $query);
   $_SESSION['message'] = 'Actualizacion realizada';
   $_SESSION['message_type'] = 'warning';
@@ -34,10 +35,10 @@ if (isset($_POST['update'])) {
       <div class="card card-body">
       <form action="edit.php?id=<?php echo $_GET['id']; ?>" method="POST">
         <div class="form-group">
-          <input name="nombre_p" type="text" class="form-control" value="<?php echo $nombre; ?>" placeholder="Nombre del productoe">
+          <input name="NOMBRE_P" type="text" class="form-control" value="<?php echo $nombre; ?>" placeholder="Nombre del productoe">
         </div>
         <div class="form-group">
-          <input name="nombre_p" type="float" class="form-control" value="<?php echo $precio; ?>" placeholder="Precio del productoe">
+          <input name="PRECIO" type="float" class="form-control" value="<?php echo $precio; ?>" placeholder="Precio del productoe">
         </div>
         <button class="btn-success" name="update">
           Update
@@ -47,4 +48,4 @@ if (isset($_POST['update'])) {
     </div>
   </div>
 </div>
-<?php include('includes/footer.php'); ?>
+
