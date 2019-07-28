@@ -15,17 +15,22 @@
 
         $row_p = mysqli_fetch_array($run_P);
 
+        $p_cat_id = $row_p['IDCATEGORIA'];
         $img1 = $row_p['img1'];
-
         $img2 = $row_p['img2'];
-
         $img3 = $row_p['img3'];
-
         $img4 = $row_p['img4'];
-
         $name = $row_p['NOMBRE_P'];
-
         $price = $row_p['PRECIO'];
+        $pro_desc = $row_p['DESCRIPCION'];
+    
+        $get_p_cat = "SELECT * from CATEGORIA where IDCATEGORA='$p_cat_id'";
+        
+        $run_p_cat = mysqli_query($db,$get_p_cat);
+        
+        $row_p_cat = mysqli_fetch_array($run_p_cat);
+        
+        $p_cat_title = $row_p_cat['p_cat_title'];
 
     }
     

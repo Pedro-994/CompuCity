@@ -48,23 +48,31 @@
                     <div class="col-sm-6">
                         <div class="box">
                             <h1 class="text-center"> <?php echo $name; ?></h1>
-                            <form action="details.php?add_cart=<?php echo $id_prod; ?>" method="post">
-                                <div class="form-group">
-                                    <label for="" class="col-md-5 control-label">Cantidad</label>
-                                    <div class="col-md-7">
-                                        <select name="cantidad" id="" class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <p class="price">$ <?php echo $price; ?></p>
-                                <p class="text-center buttons"><button
-                                        class="btn btn-success i fa fa-shopping-cart">Agregar a carrito</button></p>
-                            </form>
+
+                           <?php add_cart(); ?>
+                           
+                           <form action="detalles.php?add_cart=<?php echo $id_prod; ?>" class="form-horizontal" method="post"><!-- form-horizontal Begin -->
+                               <div class="form-group"><!-- form-group Begin -->
+                                   <label for="" class="col-md-5 control-label">Products Quantity</label>
+                                   
+                                   <div class="col-md-7"><!-- col-md-7 Begin -->
+                                          <select name="cantidad" id="" class="form-control"><!-- select Begin -->
+                                           <option>1</option>
+                                           <option>2</option>
+                                           <option>3</option>
+                                           <option>4</option>
+                                           <option>5</option>
+                                           </select><!-- select Finish -->
+                                   
+                                    </div><!-- col-md-7 Finish -->
+                                   
+                               </div><!-- form-group Finish -->
+                               
+                               <p class="price">$ <?php echo $price; ?></p>
+                               
+                               <p class="text-center buttons"><button class="btn btn-success i fa fa-shopping-cart"> Add to cart</button></p>
+                               
+                           </form><!-- form-horizontal Finish -->
                         </div>
                         <div class="row" id="thumbs">
                             <div class="col-3">

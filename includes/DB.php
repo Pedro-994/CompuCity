@@ -1,3 +1,3 @@
 <?php
-    mysqli_connect("localhost","root","","compucity");
+    $db = mysqli_connect("localhost","root","","compucity");
 ?>
