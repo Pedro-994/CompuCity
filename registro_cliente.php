@@ -48,7 +48,7 @@ if(isset($_POST['Registro'])){
     
     $c_ip = getRealIpUser();
     
-    $insert_customer = "INSERT INTO USUARIO (NOMBRE_USUARIO,CORREO,CONTRASENIA) values ('$c_name','$c_email','$c_pass')";
+    $insert_customer = "INSERT INTO usuario(NOMBRE_USUARIO,CORREO,CONTRASENIA) values ('$c_name','$c_email','$c_pass')";
     
     $run_customer = mysqli_query($db,$insert_customer);
     

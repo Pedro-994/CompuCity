@@ -5,8 +5,8 @@ $precio= '';
 
 if  (isset($_GET['id'])) {
   $id = $_GET['id'];
-  $query = "SELECT * FROM PRODUCTO WHERE IDPRODUCTO = $id";
-  $result = mysqli_query($conexion, $query);
+  $query = "SELECT * FROM producto WHERE IDPRODUCTO = $id";
+  $result = mysqli_query($db, $query);
   if (mysqli_num_rows($result)) {
     $row = mysqli_fetch_array($result);
     $nombre = $row['NOMBRE_P'];
@@ -21,7 +21,7 @@ if (isset($_POST['update'])) {
   $precio = $_POST['PRECIO'];
 
   $query = "UPDATE PRODUCTO set NOMBRE_P = '$nombre', PRECIO = $precio WHERE IDPRODUCTO=$id";
-  mysqli_query($conexion, $query);
+  mysqli_query($db, $query);
   $_SESSION['message'] = 'Actualizacion realizada';
   $_SESSION['message_type'] = 'warning';
   header('Location: index.php');

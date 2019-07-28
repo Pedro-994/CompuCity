@@ -43,9 +43,9 @@
         <tbody>
           <?php
           
-          mysqli_set_charset($conexion,"utf8");
+          mysqli_set_charset($db,"utf8");
           $query = "SELECT * FROM producto";
-          $result_tasks = mysqli_query($conexion, $query);    
+          $result_tasks = mysqli_query($db, $query);    
 
           while($row = mysqli_fetch_assoc($result_tasks)) { ?>
           <tr>

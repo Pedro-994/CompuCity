@@ -18,8 +18,8 @@
                         <select name="CAT" class="form-control" >
                         <option> Seleccione una categoria</option>
                         <?php
-                            $get_categoria = "SELECT * FROM CATEGORIA";
-                            $resultado_categoria = mysqli_query($conexion,$get_categoria);
+                            $get_categoria = "SELECT * FROM categoria";
+                            $resultado_categoria = mysqli_query($db,$get_categoria);
 
                             while ($fila = mysqli_fetch_array($resultado_categoria)){
 
@@ -117,7 +117,7 @@
 
         $insertar_producto = "INSERT INTO producto(IDCATEGORIA,NOMBRE_P,MARCA,CARACTERISTICAS,PRECIO,DESCRIPCION,img1,img2,img3,img4) VALUES ($categoria,'$nombproducto','$marca','$caracteristica',$precio,'$descripcion','$img1','$img2','$img3','$img4')";
 
-        $guardar_producto = mysqli_query($conexion,$insertar_producto);
+        $guardar_producto = mysqli_query($db,$insertar_producto);
 
         if($guardar_producto){
             echo "<script>alert('Producto insertado')</script>";

@@ -10,7 +10,7 @@
 
         mysqli_set_charset($db,"utf8");
         
-        $get_p = "SELECT * FROM PRODUCTO WHERE IDPRODUCTO = $id_prod";
+        $get_p = "SELECT * FROM producto WHERE IDPRODUCTO = $id_prod";
 
         $run_P = mysqli_query($db,$get_p);
 
@@ -25,7 +25,7 @@
         $price = $row_p['PRECIO'];
         $pro_desc = $row_p['DESCRIPCION'];
     
-        $get_p_cat = "SELECT * from CATEGORIA where IDCATEGORA='$p_cat_id'";
+        $get_p_cat = "SELECT * from categoria where IDCATEGORA='$p_cat_id'";
         
         $run_p_cat = mysqli_query($db,$get_p_cat);
         

@@ -45,7 +45,7 @@ if(isset($_POST['login'])){
     
     $pass = $_POST['pass'];
     
-    $select_customer = "SELECT * FROM USUARIO where NOMBRE_USUARIO='$username' AND CONTRASENIA='$pass'";
+    $select_customer = "SELECT * FROM usuario where NOMBRE_USUARIO='$username' AND CONTRASENIA='$pass'";
     
     $run_customer = mysqli_query($db,$select_customer);
     

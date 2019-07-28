@@ -52,7 +52,7 @@
     function getPro(){
         global $db;
         mysqli_set_charset($db,"utf8");
-        $get_producto = "SELECT * FROM PRODUCTO";
+        $get_producto = "SELECT * FROM producto";
         $resultado_producto = mysqli_query($db,$get_producto);
         if(mysqli_connect_errno()){
             echo "Error al conectar a la Base de datos";
@@ -94,7 +94,7 @@
     function getCategoria(){
         global $db;
         mysqli_set_charset($db,"utf8");
-        $get_cat = "SELECT * FROM CATEGORIA";
+        $get_cat = "SELECT * FROM categoria";
         $resultado_cat = mysqli_query($db,$get_cat);
         while ($fila = mysqli_fetch_array($resultado_cat)){
             $id_cat = $fila['IDCATEGORIA'];
@@ -111,7 +111,7 @@
         if(isset($_GET['id_cat'])){
 
             $p_cat_id = $_GET['id_cat'];
-            $get_p_cat ="SELECT * FROM CATEGORIA WHERE IDCATEGORIA = $p_cat_id";
+            $get_p_cat ="SELECT * FROM categoria WHERE IDCATEGORIA = $p_cat_id";
             $run_p_cat = mysqli_query($db,$get_p_cat);
             $row_p_cat = mysqli_fetch_array($run_p_cat);
             $p_cat_title = $row_p_cat['NOMBRECAT'];
@@ -158,7 +158,7 @@ function getpcatpro(){
 
         $p_cat_id = $_GET['id_cat'];
         
-        $get_products ="SELECT * FROM PRODUCTO where IDCATEGORIA='$p_cat_id'";
+        $get_products ="SELECT * FROM producto where IDCATEGORIA='$p_cat_id'";
         
         $run_products = mysqli_query($db,$get_products);
         

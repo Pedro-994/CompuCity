@@ -44,7 +44,7 @@
                                        
                                      $cantidad = $row_cart['CANTIDAD_PROD'];
                                        
-                                       $get_products = "SELECT * FROM PRODUCTO WHERE IDPRODUCTO='$pro_id'";
+                                       $get_products = "SELECT * FROM producto WHERE IDPRODUCTO='$pro_id'";
                                        
                                        $run_products = mysqli_query($db,$get_products);
                                        
