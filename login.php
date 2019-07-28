@@ -53,7 +53,7 @@ if(isset($_POST['login'])){
     
     $check_customer = mysqli_num_rows($run_customer);
     
-    $select_cart = "SELECT * from CARRITO WHERE ip_add='$get_ip'";
+    $select_cart = "SELECT * from detpedido WHERE IDPRODUCTO='$get_ip'";
     
     $run_cart = mysqli_query($db,$select_cart);
     

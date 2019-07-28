@@ -1,6 +1,7 @@
 <?php
     include("includes/header.php");
 ?>
+  <p>.</p>
   <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="EditarPerfil-tab" data-toggle="tab" href="#EditarPerfil" role="tab"

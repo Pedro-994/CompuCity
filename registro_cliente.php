@@ -52,7 +52,7 @@ if(isset($_POST['Registro'])){
     
     $run_customer = mysqli_query($db,$insert_customer);
     
-    $sel_cart = "SELECT * FROM carrito where ip_add='$c_ip'";
+    $sel_cart = "SELECT * FROM detpedido where IDPRODUCTO='$c_ip'";
     
     $run_cart = mysqli_query($db,$sel_cart);
     

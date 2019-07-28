@@ -26,7 +26,7 @@
         
         $product_qty = $_POST['cantidad'];
         
-        $check_product = "SELECT * from CARRITO where ip_add='$ip_add' AND p_id='$p_id'";
+        $check_product = "SELECT * from detpedido where IDPEDIDO='$ip_add' AND IDPRODUCTO='$p_id'";
         
         $run_check = mysqli_query($db,$check_product);
         
@@ -37,7 +37,7 @@
             
         }else{
             
-            $query = "INSERT INTO CARRITO (p_id,ip_add,cantidad) values ('$p_id','$ip_add','$product_qty')";
+            $query = "INSERT INTO detpedido (IDPRODUCTO,IDPEDIDO,CANTIDAD_PROD) values ('$p_id','$ip_add','$product_qty')";
             
             $run_query = mysqli_query($db,$query);
             
@@ -123,9 +123,9 @@
             if($count==0){
             
                 echo "
-                    <div 'class='display-4'>
+                    <div class= 'mt-5'>
                     
-                        <h1> No se encontraron productos en esta categoria </h1>
+                        <h1 class='display-4'> No se encontraron productos en esta categoria </h1>
                     
                     </div>
                 ";
@@ -134,9 +134,9 @@
                 
                 echo "
                 
-                    <div 'class='display-4'>
+                    <div class='mt-5'>
                     
-                        <h1> $p_cat_title </h1>
+                        <h class='display-4'> $p_cat_title </h>
                         
                         <p> $p_cat_desc </p>
                     

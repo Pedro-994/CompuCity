@@ -8,13 +8,13 @@
                 <!--box carrito-->
                 <div>
                     <form action="carrito.php" method="POST" enctype="multipart/form-data">
-                        <h1>Carrito de compra</h1>
+                        <h1 class= "mt-5">Carrito de compra</h1>
 
                         <?php 
                        
                                     $ip_add = getRealIpUser();
                     
-                                    $select_cart = "SELECT * FROM CARRITO WHERE ip_add = '$ip_add'";
+                                    $select_cart = "SELECT * FROM detpedido WHERE IDPEDIDO = '$ip_add'";
 
                                     $run_cart = mysqli_query($db,$select_cart);
                        
@@ -40,9 +40,9 @@
                                    
                                    while($row_cart = mysqli_fetch_array($run_cart)){
                                        
-                                     $pro_id = $row_cart['p_id'];
+                                     $pro_id = $row_cart['IDPRODUCTO'];
                                        
-                                     $cantidad = $row_cart['cantidad'];
+                                     $cantidad = $row_cart['CANTIDAD_PROD'];
                                        
                                        $get_products = "SELECT * FROM PRODUCTO WHERE IDPRODUCTO='$pro_id'";
                                        
@@ -138,7 +138,7 @@
                         
                         foreach($_POST['remove'] as $remove_id){
                             
-                            $delete_product = "DELETE FROM carrito where p_id='$remove_id'";
+                            $delete_product = "DELETE FROM detpedido where IDPRODUCTO='$remove_id'";
                             
                             $run_delete = mysqli_query($db,$delete_product);
                             

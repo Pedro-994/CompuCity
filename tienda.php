@@ -14,7 +14,7 @@
                 <!--Contenedor Productos-->
                 <?php
                     if(!isset($_GET['id_cat'])){
-                        echo"<p class='display-4'>Todos los productos</p>";
+                        echo"<p class='display-4 mt-5'>Todos los productos</p>";
                     }
                     nomcat();
                     

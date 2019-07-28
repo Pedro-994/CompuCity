@@ -54,7 +54,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
         <!--Barra de navegacion-->
-        <a class="navbar-brand mx-auto text-white " href="../index.php" style="width: 100px;">Logo</a>
+        <a class="navbar-brand mx-auto" href="../index.php"><img src="/img/logo.jpg" class="rounded" style="width: 100px;"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -94,23 +94,23 @@
                                 class="far fa-user"></i> Tu
                             Cuenta</a>
                         <div class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../mi_cuenta.php">Mi cuenta</a>
                             <?php 
                            
                            if(!isset($_SESSION['NOMBRE_USUARIO'])){
                        
-                                echo "<a class='dropdown-item' href='login.php'>Iniciar Sesion</a>";
+                                echo "<a class='dropdown-item' href='login.php'>Iniciar Sesion</a>
+                                <a class='dropdown-item' href='../registro_cliente.php'>Registrarse</a>";
+
                                 
 
                                }else{
-                                echo "<a class='dropdown-item' href='logout.php'>Cerrar Sesion</a>";
+                                echo "<a class='dropdown-item' href='../mi_cuenta.php'>Mi cuenta</a>
+                                <a class='dropdown-item' href='logout.php'>Cerrar Sesion</a>
+                                <a class='dropdown-item' >Consultar Pedido</a>";
 
                                }
                            
-                         ?>
-                            <a class="dropdown-item" href="../registro_cliente.php">Registrarse</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Consultar Pedido</a>
+                         ?>                            
                         </div>
                     </li>
                     <li class="nav-item"><a href="../carrito.php" class="nav-link text-white"><i
