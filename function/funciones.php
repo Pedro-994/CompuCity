@@ -81,7 +81,7 @@
                     <p class='button'>
                         <a href='detalles.php?id_prod=$id_prod'
                             class='btn btn-outline-success'>Detalles</a>
-                        <a href='detalles.php?id_prod$id_prod' class='btn btn-success'><i class='fas fa-cart-plus'>Agregar a
+                        <a href='detalles.php?id_prod=$id_prod' class='btn btn-success'><i class='fas fa-cart-plus'>Agregar a
                                 Carrito</i>
                         </a>
                     </p>

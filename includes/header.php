@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("includes/DB.php");
     include("function/funciones.php");
 ?>
@@ -63,6 +64,17 @@
                 <li class="nav-item active"><a class="nav-link text-white" href="../index.php"><i
                             class="fas fa-home"></i></a>
                 </li>
+                <?php 
+                   
+                   if(!isset($_SESSION['NOMBRE_USUARIO'])){
+                       
+                       echo "<li class='nav-item '><a class='nav-link text-white'>Bienvenido : Invitado</a></li>";
+                       
+                   }else{
+                       $nombre = $_SESSION['NOMBRE_USUARIO'];
+                       echo "<li class='nav-item '><a class='nav-link text-white'>Bienvenido : $nombre </a></li>";                       
+                   }
+                   ?>
                 <li class="nav-item "><a href="../tienda.php" class="nav-link text-white">PRODUCTOS</a></li>
                 <li class="nav-item "><a href="../nosotros.php" class="nav-link text-white">ACERCA DE</a></li>
                 <li class="nav-item "><a href="../contacto.php" class="nav-link text-white">CONTACTO</a></li>
@@ -83,13 +95,25 @@
                             Cuenta</a>
                         <div class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="../mi_cuenta.php">Mi cuenta</a>
-                            <a class="dropdown-item" href="../login.php">Inicia Sesion</a>
+                            <?php 
+                           
+                           if(!isset($_SESSION['NOMBRE_USUARIO'])){
+                       
+                                echo "<a class='dropdown-item' href='login.php'>Iniciar Sesion</a>";
+                                
+
+                               }else{
+                                echo "<a class='dropdown-item' href='logout.php'>Cerrar Sesion</a>";
+
+                               }
+                           
+                         ?>
                             <a class="dropdown-item" href="../registro_cliente.php">Registrarse</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Consultar Pedido</a>
                         </div>
                     </li>
-                    <li class="nav-item"><a href="../carrito_de_compra.php" class="nav-link text-white"><i
+                    <li class="nav-item"><a href="../carrito.php" class="nav-link text-white"><i
                                 class="fas fa-shopping-cart"></i></a>
                     </li>
                 </ul>
