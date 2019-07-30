@@ -73,7 +73,7 @@ if(isset($_POST['login'])){
         
        echo "<script>alert('Usted está conectado')</script>"; 
         
-       echo "<script>window.open('index', '_self')</script>";
+       echo "<script>window.open('index.php', '_self')</script>";
         
     }else{
         

@@ -62,7 +62,7 @@ if(isset($_POST['Registro'])){
         
         /// If register have items in cart ///
         
-        $_SESSION['NOMBRE_USUARIO']=$c_email;
+        $_SESSION['NOMBRE_USUARIO']=$c_name;
         
         echo "<script>alert('Registro exitoso')</script>";
         
@@ -72,7 +72,7 @@ if(isset($_POST['Registro'])){
         
         /// If register without items in cart ///
         
-        $_SESSION['NOMBRE_USUARIO']=$c_email;
+        $_SESSION['NOMBRE_USUARIO']=$c_name;
         
         echo "<script>alert('Registro exitoso')</script>";
         

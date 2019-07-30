@@ -5,9 +5,9 @@
         <div class="contenedor mt-1">
             <img src="img/nvidia.jpg" class="img-fluid" alt="Responsive image">
             <div class="centrado"><a href="productos/Grafica/2080ti.html">
-                    <h5 class="text-white display-5">Tecnologia RXT</h5>
+                    <h5 class="text-white display-5 mt-3">Tecnologia RXT</h5>
                 </a>
-                <p class="mt-3">
+                <p class="text-break">
                     La inteligencia artificial y el sombreado programable para una nueva forma de experimentar los
                     juegos.
                 </p>

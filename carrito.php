@@ -8,19 +8,17 @@
                 <!--box carrito-->
                 <div>
                     <form action="carrito.php" method="POST" enctype="multipart/form-data">
-                        <h1 class= "mt-5">Carrito de compra</h1>
+                        <h1 class="mt-5">Carrito de compra</h1>
 
                         <?php 
-                       
-                                    $ip_add = getRealIpUser();
+                            $ip_add = getRealIpUser();
                     
-                                    $select_cart = "SELECT * FROM detpedido WHERE IDPEDIDO = '$ip_add'";
+                            $select_cart = "SELECT * FROM detpedido WHERE IDPEDIDO = '$ip_add'";
 
-                                    $run_cart = mysqli_query($db,$select_cart);
+                            $run_cart = mysqli_query($db,$select_cart);
                        
-                                    $count = mysqli_num_rows($run_cart);
-
-                                ?>
+                            $count = mysqli_num_rows($run_cart);
+                        ?>
                         <p class="text-muted">Tienes <?php echo $count; ?> articulo(s) en tu carrito</p>
                         <div class="table-responsive">
                             <table class="table">
@@ -127,7 +125,7 @@
                             </div>
                         </div>
                     </form>
-                </div> 
+                </div>
                 <?php 
                
                 function update_cart(){
@@ -157,7 +155,8 @@
                
                 ?>
 
-            </div> <!--box carrito-->
+            </div>
+            <!--box carrito-->
 
             <div class="col-md-3 mt-5">
                 <div class="box">
