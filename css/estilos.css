@@ -4,6 +4,10 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
 
 }
+.color-razer{
+    color: #00ff00;
+    border-bottom: 6px solid #00ff00;
+}
 
 .bg-black {
     background: #000;

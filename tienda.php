@@ -16,10 +16,8 @@
                     if(!isset($_GET['id_cat'])){
                         echo"<p class='display-4 mt-5'>Todos los productos</p>";
                     }
-                    nomcat();
-                    
-                ?>
-                
+                    nomcat();  
+                ?>    
                 <div class="container-fluid">
 
                     <section class="lista_productos mt-5">

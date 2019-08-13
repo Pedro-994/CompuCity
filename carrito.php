@@ -9,7 +9,6 @@
                 <div>
                     <form action="carrito.php" method="POST" enctype="multipart/form-data">
                         <h1 class="mt-5">Carrito de compra</h1>
-
                         <?php 
                             $ip_add = getRealIpUser();
                     

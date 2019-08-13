@@ -1,9 +1,9 @@
 <body>
   <!-- Footer -->
-  <footer class="page-footer font-small">
+  <footer class="font-small">
 
     <!-- Footer Links -->
-    <div class="container text-center text-md-left mt-5">
+    <div class="container text-center text-md-left mt-5" backgroung="">
 
       <!-- Grid row -->
       <div class="row mt-3">

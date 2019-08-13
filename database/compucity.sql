@@ -1052,5 +1052,109 @@ CALL INSERTAPRODUCTO (4,'micro ATX H310M H, S-1151','Gigabyte',11,'CARACTERISTIC
 CALL INSERTAPRODUCTO (9,'Surpassion ST, Alámbrico','Cougar', 32,'CARACTERISTICAS',749.00,'DESCRIPCION','CP-COUGAR-3MSSTWOB0001-1.jpg','CP-COUGAR-3MSSTWOB0001-2.jpg','CP-COUGAR-3MSSTWOB0001-3.jpg','CP-COUGAR-3MSSTWOB0001-4.jpg');
 CALL INSERTAPRODUCTO (1,'AMD Radeon VII Gaming','ASRock',5,'CARACTERISTICAS',2479.00,'DESCRIPCION','CP-ASROCK-PGXRVII16G-1.webp','CP-ASROCK-PGXRVII16G-2.jpg','CP-ASROCK-PGXRVII16G-3.jpg','CP-ASROCK-PGXRVII16G-4.jpg');
 
+/*Bitacoras*/
+/*Producto*/
+CREATE TABLE BITACORA_PRODUCTO(
+idbp int primary key auto_increment,
+idproducto int,
+fecha timestamp default CURRENT_TIMESTAMP,
+ejecutor varchar(25),
+actividad_realizada varchar(255),
+informacion_actual varchar(250),
+informacion_anterior varchar(250)
+);
 
-select count(idproducto) from producto
+DELIMITER //
+CREATE TRIGGER bitacoraproducto AFTER INSERT ON producto FOR EACH ROW
+BEGIN
+	INSERT INTO bitacora_producto(idproducto,ejecutor,actividad_realizada,informacion_actual) values(new.idproducto,current_user,"Se inserto nuevo producto",
+    concat("Informacion actual: ",new.idcategoria," ",new.nombre_p," ",new.marca,
+			" ",new.CANTIDAD_ALMACEN," ",new.CARACTERISTICAS," ",new.precio," ",new.descripcion," ",
+			new.img1," ",new.img2," ",new.img3," ",new.img4));
+END //
+
+DELIMITER //
+CREATE TRIGGER bitacoraproductoDel after DELETE ON producto FOR EACH ROW
+BEGIN 
+	INSERT INTO bitacora_producto(idproducto,ejecutor,actividad_realizada,informacion_anterior) values(old.idproducto,current_user,"Se elimino un producto",
+    concat("Informacion anterior: ",old.idcategoria," ",old.nombre_p," ",old.marca,
+			" ",old.CANTIDAD_ALMACEN," ",old.CARACTERISTICAS," ",old.precio," ",old.descripcion," ",
+			old.img1," ",old.img2," ",old.img3," ",old.img4));
+END //
+DELIMITER //
+CREATE TRIGGER bitacoraproductoUP after UPDATE ON producto FOR EACH ROW
+BEGIN
+	INSERT INTO bitacora_producto(idproducto,ejecutor,actividad_realizada,informacion_actual,informacion_anterior) values(new.idproducto,current_user,"Se actualizo producto",
+    concat("Informacion actual: ",new.idcategoria," ",new.nombre_p," ",new.marca,
+			" ",new.CANTIDAD_ALMACEN," ",new.CARACTERISTICAS," ",new.precio," ",new.descripcion," ",
+			new.img1," ",new.img2," ",new.img3," ",new.img4),concat("Informacion anterior: ",old.idcategoria," ",old.nombre_p," ",old.marca,
+			" ",old.CANTIDAD_ALMACEN," ",old.CARACTERISTICAS," ",old.precio," ",old.descripcion," ",
+			old.img1," ",old.img2," ",old.img3," ",old.img4));
+END //
+
+CREATE TABLE BITACORA_PEDIDO(
+idbp int primary key auto_increment,
+idpedido int,
+fecha timestamp default CURRENT_TIMESTAMP,
+ejecutor varchar(25),
+actividad_realizada varchar(255),
+informacion_actual varchar(250),
+informacion_anterior varchar(250)
+);
+DELIMITER //
+CREATE TRIGGER bitacorapedidoINS AFTER INSERT ON pedido FOR EACH ROW
+BEGIN
+	INSERT INTO bitacora_pedido(idpedido,ejecutor,actividad_realizada,informacion_actual) values(new.idpedido,current_user,"Se Inserto pedido",
+    concat("Informacion actual: ",new.SUBTOTAL," ",new.TOTAL," ",new.IDUSUARIO));
+END //
+
+DELIMITER //
+CREATE TRIGGER bitacorapedidoDEL AFTER DELETE ON pedido FOR EACH ROW
+BEGIN
+	INSERT INTO bitacora_pedido(idpedido,ejecutor,actividad_realizada,informacion_anterior) values(old.idpedido,current_user,"Se elimino pedido",
+    concat("Informacion anterior: ",old.SUBTOTAL," ",old.TOTAL," ",old.IDUSUARIO));
+END //
+
+DELIMITER //
+CREATE TRIGGER bitacorapedidoUP AFTER UPDATE ON pedido FOR EACH ROW
+BEGIN
+	INSERT INTO bitacora_pedido(idpedido,ejecutor,actividad_realizada,informacion_actual,informacion_anterior) values(new.idpedido,current_user,"Se actualizo pedido",
+    concat("Informacion actual: ",new.SUBTOTAL," ",new.TOTAL," ",new.IDUSUARIO),concat("Informacion anterior: ",old.SUBTOTAL," ",old.TOTAL," ",old.IDUSUARIO));
+END //
+CREATE TABLE BITACORA_USUARIO(
+idbp int primary key auto_increment,
+idusuario int,
+fecha timestamp default CURRENT_TIMESTAMP,
+ejecutor varchar(25),
+actividad_realizada varchar(255),
+informacion_actual varchar(250),
+informacion_anterior varchar(250)
+);
+
+DELIMITER //
+CREATE TRIGGER bitacorausuarioINS AFTER INSERT ON usuario FOR EACH ROW
+BEGIN
+	INSERT INTO bitacora_usuario(idusuario,ejecutor,actividad_realizada,informacion_actual) values(new.idusuario,current_user,"Se Inserto usuario",
+    concat("Informacion actual: ",new.NOMBRE," ",new.APELLIDO_PU," ",new.APELLIDO_MU,
+    " ",new.NUMPEDIDO," ",new.NOMBRE_USUARIO," ",new.ESTADO," ",new.CIUDAD," ",new.COLONIA," ",new.calle," "
+    ,new.FECHA_NAC," ",new.TELEFONO," ",new.CONTRASENIA," ",new.CORREO," ",new.CODIGO_POSTAL," ",new.NUMERO_INT," ",new.NUMERO_ext));
+END //
+
+DELIMITER //
+CREATE TRIGGER bitacorausuarioDEL AFTER DELETE ON usuario FOR EACH ROW
+BEGIN
+	INSERT INTO bitacora_usuario(idusuario,ejecutor,actividad_realizada,informacion_anterior) values(old.idusuario,current_user,"Se elimino usuario",
+    concat("Informacion anterior: ",old.NOMBRE," ",old.APELLIDO_PU," ",old.APELLIDO_MU,
+    " ",old.NUMPEDIDO," ",old.NOMBRE_USUARIO," ",old.ESTADO," ",old.CIUDAD," ",old.COLONIA," ",old.calle," "
+    ,old.FECHA_NAC," ",old.TELEFONO," ",old.CONTRASENIA," ",old.CORREO," ",old.CODIGO_POSTAL," ",old.NUMERO_INT," ",old.NUMERO_ext));
+END //
+DELIMITER //
+CREATE TRIGGER bitacorausuarioUP AFTER update ON usuario FOR EACH ROW
+BEGIN
+	INSERT INTO bitacora_usuario(idusuario,ejecutor,actividad_realizada,informacion_actual,informacion_anterior) values(new.idusuario,current_user,"Se actualizo usuario",
+    concat("Informacion actual: ",new.NOMBRE," ",new.APELLIDO_PU," ",new.APELLIDO_MU,
+    " ",new.NUMPEDIDO," ",new.NOMBRE_USUARIO," ",new.ESTADO," ",new.CIUDAD," ",new.COLONIA," ",new.calle," "
+    ,new.FECHA_NAC," ",new.TELEFONO," ",new.CONTRASENIA," ",new.CORREO," ",new.CODIGO_POSTAL," ",new.NUMERO_INT," ",new.NUMERO_ext),concat("Informacion anterior: ",old.NOMBRE," ",old.APELLIDO_PU," ",old.APELLIDO_MU,
+    " ",old.NUMPEDIDO," ",old.NOMBRE_USUARIO," ",old.ESTADO," ",old.CIUDAD," ",old.COLONIA," ",old.calle," "
+    ,old.FECHA_NAC," ",old.TELEFONO," ",old.CONTRASENIA," ",old.CORREO," ",old.CODIGO_POSTAL," ",old.NUMERO_INT," ",old.NUMERO_ext));
+END //
