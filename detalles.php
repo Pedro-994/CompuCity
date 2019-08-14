@@ -99,9 +99,10 @@
                     </div>
                     <div id="detalles">
                     <h4>Detalles</h4>
-                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam omnis et tempore eligendi illo voluptates repudiandae odio alias, minima eveniet modi consectetur fugit! Sed ipsa veniam, reiciendis vero doloribus voluptas?</p>
+                    <p ><?php echo $pro_desc; ?></p>
                      <div class="table-responsive-sm">
-            <table class="table text-white">
+<!--
+                <table class="table text-white">
                 <thead>
                     <tr>
                         <th scope="col"></th>
@@ -143,6 +144,7 @@
                     </tr>
                 </tbody>
             </table>
+-->
         </div>
                     </div>
                 </div>

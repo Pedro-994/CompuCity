@@ -18,7 +18,7 @@
         </div>
         <div class="textbox">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Repetir contraseña">
+            <input type="password" name="password2" placeholder="Repetir contraseña" required>
         </div>
         <div class="text-center"><!-- text-center Begin -->   
             <button type="submit" name="Registro" class="btn btn-block btn-outline-success">
@@ -41,13 +41,15 @@
 if(isset($_POST['Registro'])){
     
     $c_name = $_POST['user'];
-    
     $c_email = $_POST['email'];
-    
     $c_pass = $_POST['password'];
-    
-    $c_ip = getRealIpUser();
-    
+    $c_pass2 = $_POST['password'];
+        if(strcmp(!$c_pass,$c_pass2)){
+            echo "<script>alert('La contraseñas no coinciden')</script>";
+            echo "<script>window.open('registro_cliente.php','_self')</script>";
+        }else{
+          $c_ip = getRealIpUser();
+          
     $insert_customer = "INSERT INTO usuario(NOMBRE_USUARIO,CORREO,CONTRASENIA) values ('$c_name','$c_email','$c_pass')";
     
     $run_customer = mysqli_query($db,$insert_customer);
@@ -78,7 +80,8 @@ if(isset($_POST['Registro'])){
         
         echo "<script>window.open('index.php','_self')</script>";
         
-    }
+    } 
+        }
     
 }
 

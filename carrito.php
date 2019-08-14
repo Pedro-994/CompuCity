@@ -11,11 +11,8 @@
                         <h1 class="mt-5">Carrito de compra</h1>
                         <?php 
                             $ip_add = getRealIpUser();
-                    
                             $select_cart = "SELECT * FROM detpedido WHERE IDPEDIDO = '$ip_add'";
-
                             $run_cart = mysqli_query($db,$select_cart);
-                       
                             $count = mysqli_num_rows($run_cart);
                         ?>
                         <p class="text-muted">Tienes <?php echo $count; ?> articulo(s) en tu carrito</p>
@@ -35,28 +32,18 @@
                                    
                                    $total = 0;
                                    
-                                   while($row_cart = mysqli_fetch_array($run_cart)){
+                                   while($row_cart = mysqli_fetch_array($run_cart)){       
+                                        $pro_id = $row_cart['IDPRODUCTO'];
+                                        $cantidad = $row_cart['CANTIDAD_PROD'];
+                                        $get_products = "SELECT * FROM producto WHERE IDPRODUCTO='$pro_id'";
+                                        $run_products = mysqli_query($db,$get_products);
                                        
-                                     $pro_id = $row_cart['IDPRODUCTO'];
-                                       
-                                     $cantidad = $row_cart['CANTIDAD_PROD'];
-                                       
-                                       $get_products = "SELECT * FROM producto WHERE IDPRODUCTO='$pro_id'";
-                                       
-                                       $run_products = mysqli_query($db,$get_products);
-                                       
-                                       while($row = mysqli_fetch_array($run_products)){
-                                           
+                                       while($row = mysqli_fetch_array($run_products)){       
                                            $nombre = $row['NOMBRE_P'];
-                                           
                                            $img1 = $row['img1'];
-                                           
                                            $precio = $row['PRECIO'];
-                                           
                                            $sub_total = $row['PRECIO']*$cantidad;
-                                           
-                                           $total += $sub_total;
-                                           
+                                           $total += $sub_total;      
                                    ?>
                                     <tr>
                                         <td>
@@ -67,96 +54,62 @@
                                                 <?php echo $nombre; ?> </a>
                                         </td>
                                         <td>
-
                                             <?php echo $cantidad; ?>
-
                                         </td>
                                         <td>
-
                                             $ <?php echo $precio; ?>
-
                                         </td>
                                         <td>
-
                                             <input type="checkbox" name="remove[]" value="<?php echo $pro_id; ?>">
-
                                         </td>
                                         <td>
-
                                             $<?php echo $sub_total; ?>
-
                                         </td>
 
-                                    </tr><!-- tr Finish -->
-
+                                    </tr>
                                     <?php } } ?>
                                 </tbody>
                                 <tfoot>
-                                    <!-- tfoot Begin -->
-
                                     <tr>
-                                        <!-- tr Begin -->
-
                                         <th colspan="5">Total</th>
                                         <th colspan="2">$<?php echo $total; ?></th>
-
-                                    </tr><!-- tr Finish -->
-
-                                </tfoot><!-- tfoot Finish -->
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                         <div>
                             <div class="float-left">
-                                <a href="index.php" class="btn btn-default">
-                                    <!-- btn btn-default Begin -->
-
+                                <a href="tienda.php" class="btn btn-default">
                                     <i class="fa fa-chevron-left"></i> Continuar comprando
-
-                                </a><!-- btn btn-default Finish -->
+                                </a>
                             </div>
                             <div class="float-right">
                                 <button type="submit" name="update" value="Actualizar" class="btn btn-outline-success">
                                     <i class="fa fa-refresh"> Actualizar</i>
-                                </button>
-                                <a href="login.php" class="btn btn-success">
+                                </button  type="submit" name="pedido" class="btn btn-success">
+                                <a  class="btn btn-success">
                                     Proceder a pagar <i class="fa fa-chevron-right"></i>
                                 </a>
                             </div>
                         </div>
                     </form>
                 </div>
-                <?php 
-               
+                <?php     
                 function update_cart(){
-                    
                     global $db;
-                    
                     if(isset($_POST['update'])){
-                        
                         foreach($_POST['remove'] as $remove_id){
-                            
                             $delete_product = "DELETE FROM detpedido where IDPRODUCTO='$remove_id'";
-                            
                             $run_delete = mysqli_query($db,$delete_product);
-                            
                             if($run_delete){
-                                
-                                echo "<script>window.open('carrito.php','_self')</script>";
-                                
-                            }
-                            
-                        }
-                        
-                    }
-                    
+                                echo "<script>window.open('carrito.php','_self')</script>";   
+                            }   
+                        }   
+                    } 
                 }
                 echo @$up_cart = update_cart();
-               
                 ?>
-
             </div>
-            <!--box carrito-->
-
             <div class="col-md-3 mt-5">
                 <div class="box">
                     <div class="box-header">
@@ -192,11 +145,9 @@
         </div>
     </div>
 </div>
-
-
 <?php
         include("includes/footer.php");
-    ?>
+?>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -206,7 +157,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-
 </body>
-
 </html>

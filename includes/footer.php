@@ -15,17 +15,10 @@
           <h6 class="text-uppercase font-weight-bold">Paginas</h6>
           <hr class="accent-2 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <ul>
-            <li><a href="http://" target="_blank" rel="noopener noreferrer"></a>Carrito de compra</li>
-            <li><a href="http://" target="_blank" rel="noopener noreferrer"></a>Tienda</li>
-            <li><a href="http://" target="_blank" rel="noopener noreferrer"></a>Contacto</li>
-            <li><a href="http://" target="_blank" rel="noopener noreferrer"></a>Mi cuenta</li>
-          </ul>
-          <h6 class="text-uppercase font-weight-bold">Usuario</h6>
-          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <ul>
-            <li><a href="http://" target="_blank" rel="noopener noreferrer"></a>Login</li>
-            <li><a href="http://" target="_blank" rel="noopener noreferrer"></a>Registro</li>
-          </ul>
+            <li><a href="carrito.php">Carrito de compra</a></li>
+            <li><a href="tienda.php">Tienda</a></li>
+            <li><a href="contacto.php" >Contacto</a></li>
+            <li><a href="mi_cuenta.php">Mi cuenta</a></li>
 
         </div>
         <!-- Grid column -->
@@ -33,43 +26,22 @@
         <!-- Grid column -->
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
-          <!-- Links -->
-          <h6 class="text-uppercase font-weight-bold">Products</h6>
-          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <a href="#!">Productos</a>
-          </p>
-          <p>
-            <a href="#!">Ensamble</a>
-          </p>
-          <p>
-            <a href="#!">Marcas</a>
-          </p>
-          <p>
-            <a href="#!">Acerca de</a>
-          </p>
+        <?php 
+            getCategoria2(); 
+        ?>
 
         </div>
         <!-- Grid column -->
 
         <!-- Grid column -->
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-          <!-- Links -->
-          <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+        </ul>
+          <h6 class="text-uppercase font-weight-bold">Usuario</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <a href="#!">Tu cuenta</a>
-          </p>
-          <p>
-            <a href="#!">Registrate</a>
-          </p>
-          <p>
-            <a href="#!">Compras</a>
-          </p>
-          <p>
-            <a href="#!">Ayuda</a>
-          </p>
+          <ul>
+            <li><a href="login.php">Login</a></li>
+            <li><a href="registro_cliente.php">Registro</a></li>
+          </ul>
 
         </div>
         <!-- Grid column -->

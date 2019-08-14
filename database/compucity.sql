@@ -22,7 +22,7 @@ CREATE TABLE USUARIO(
 );
 
  CREATE TABLE CATEGORIA(
-	IDCATEGORIA INT(5) PRIMARY KEY,
+	IDCATEGORIA INT(5) PRIMARY KEY AUTO_INCREMENT,
     NOMBRECAT VARCHAR(30),
     DESCRIPCIONCAT TEXT
  );
@@ -155,12 +155,11 @@ END $$
 /*Procedimiento inserta categoria*/
 DELIMITER $$
 CREATE PROCEDURE INSERTACATEGORIA(
-	IDCATEGORIA INT(5) ,
-    NOMBRECAT VARCHAR(30),
+	NOMBRECAT VARCHAR(30),
     DESCRIPCIONCAT TEXT(300)
  )
 BEGIN
-INSERT INTO CATEGORIA VALUES (IDCATEGORIA,NOMBRECAT,DESCRIPCIONCAT);
+INSERT INTO CATEGORIA VALUES (NOMBRECAT,DESCRIPCIONCAT);
 END $$
 /*Procedimiento creacion pedido*/
 DELIMITER $$
@@ -252,16 +251,16 @@ DELIMITER //
  
 
 
-CALL INSERTACATEGORIA(1,'Tarjeta grafica','Tarjeta grafica');
-CALL INSERTACATEGORIA(2,'Procesador','Procesador amd, intel');
-CALL INSERTACATEGORIA(3,'Fuente de poder','Fuente de poder');
-CALL INSERTACATEGORIA(4,'Motherboard','Tarjeta madre');
-CALL INSERTACATEGORIA(5,'Gabinete','torres atx,mini atx, micro atx');
-CALL INSERTACATEGORIA(6,'Monitor','monitores y pantallas');
-CALL INSERTACATEGORIA(7,'Enfriamiento','ventiladores,disipadores,refrigeracion');
-CALL INSERTACATEGORIA(8,'Almacenamiento','hhd,ssd,usb');
-CALL INSERTACATEGORIA(9,'Periferico','mouse,audifonos,impresoras,teclados');
-CALL INSERTACATEGORIA(10,'Laptop','Equipo portatil');
+CALL INSERTACATEGORIA('Tarjeta grafica','Tarjeta grafica');
+CALL INSERTACATEGORIA('Procesador','Procesador amd, intel');
+CALL INSERTACATEGORIA('Fuente de poder','Fuente de poder');
+CALL INSERTACATEGORIA('Motherboard','Tarjeta madre');
+CALL INSERTACATEGORIA('Gabinete','torres atx,mini atx, micro atx');
+CALL INSERTACATEGORIA('Monitor','monitores y pantallas');
+CALL INSERTACATEGORIA('Enfriamiento','ventiladores,disipadores,refrigeracion');
+CALL INSERTACATEGORIA('Almacenamiento','hhd,ssd,usb');
+CALL INSERTACATEGORIA('Periferico','mouse,audifonos,impresoras,teclados');
+CALL INSERTACATEGORIA('Laptop','Equipo portatil');
 
 CALL llenado_detalle (1, 1, 20, 'PENDIENTE', 'Entregar a Ricardo', 1, '2019-07-30');
 CALL llenado_detalle (2, 1, 15, 'ENTREGADO', 'Entregar a Ricardo', 1, '2019-07-1');

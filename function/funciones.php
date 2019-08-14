@@ -105,6 +105,23 @@
                 
         }
     }
+    function getCategoria2(){
+        global $db;
+        mysqli_set_charset($db,"utf8");
+        $get_cat = "SELECT * FROM categoria";
+        $resultado_cat = mysqli_query($db,$get_cat);
+
+        echo "<h6 class='text-uppercase font-weight-bold'>Categorias</h6> <hr class='accent-2 mt-0 d-inline-block mx-auto' style='width: 60px;'>
+            <ul>";
+        while ($fila = mysqli_fetch_array($resultado_cat)){
+            $id_cat = $fila['IDCATEGORIA'];
+            $nomcat = $fila['NOMBRECAT'];
+            
+            echo "<li><a href='tienda.php?id_cat=$id_cat'> $nomcat</a></li>";
+
+                
+        }
+    }
 
     function nomcat(){
         global $db;

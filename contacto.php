@@ -83,7 +83,8 @@
             </div>
         </div>
     </section>
-
+<!--
+    
     <section class="info-head-section bg-danger">
         <div class="container">
             <div class="row">
@@ -98,6 +99,7 @@
             </div>
         </div>
     </section>
+-->
     <section class="info-section text-muted py-5" id="info-section">
         <div class="container">
             <div class="row">

@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="css/estilos.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/75a823aec8.js"></script>
+    <script src="js/maps.js"></script>
     <title>CompuCity</title>
   </head>
 
