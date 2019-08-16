@@ -50,7 +50,7 @@
                                             <img src="admin/img_prod/<?php echo $img1; ?>" alt="Product 3a">
                                         </td>
                                         <td>
-                                            <a href="detalles.php?pro_id=<?php echo $pro_id; ?>">
+                                            <a href="detalles.php?id_prod=<?php echo $pro_id; ?>">
                                                 <?php echo $nombre; ?> </a>
                                         </td>
                                         <td>

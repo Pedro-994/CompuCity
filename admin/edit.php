@@ -28,9 +28,8 @@ if (isset($_POST['update'])) {
   $precio = $_POST['PRECIO'];
   $cantidad = $_POST['CANTIDAD_ALMACEN'];
   $marca = $_POST['MARCA'];
-  
-  $query = "UPDATE producto set NOMBRE_P = '$nombre', PRECIO = $precio ,CANTIDAD_ALMACEN = $cantidad,
-  MARCA = '$marca' WHERE IDPRODUCTO=$id";
+
+  $query = "CALL actualizaproducto($id,'$nombre',$precio,$cantidad,'$marca')";
   mysqli_query($db, $query);
   echo "<script>alert('Registro actualizado')</script>"; 
   echo "<script>window.open('index.php', '_self')</script>";

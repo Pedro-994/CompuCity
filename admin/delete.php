@@ -4,7 +4,7 @@ include("includes/DB.php");
 
 if(isset($_GET['id'])) {
   $id = $_GET['id'];
-  $query = "DELETE FROM producto WHERE IDPRODUCTO = $id";
+  $query = "CALL eliminaproducto($id)";
   $result = mysqli_query($db, $query);
   if(!$result) {
     die("Consulta fallida.");
