@@ -55,27 +55,16 @@
           <p>
             <i class="fas fa-home mr-3"></i> Mexico, Metepec, Mx</p>
           <p>
-            <i class="fas fa-envelope mr-3"></i> info@example.com</p>
+            <i class="fas fa-envelope mr-3"></i> pedro@compucity.co</p>
           <p>
             <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
           <p>
             <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-
         </div>
-        <!-- Grid column -->
-
       </div>
-      <!-- Grid row -->
-
     </div>
-    <!-- Footer Links -->
-
-    <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2019 Copyright:
       <a href="http://compucity.co/"> compucity.co</a>
     </div>
-    <!-- Copyright -->
-
   </footer>
-  <!-- Footer -->
 </body>

@@ -1,5 +1,9 @@
 <?php
     include("includes/header.php");
+
+if(!isset($_SESSION['NOMBRE_USUARIO'])){
+  echo "<script>window.open('index.php','_self')</script>";
+}
 ?>
 <p>.</p>
 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
@@ -296,19 +300,18 @@
       <div class="row">
         <div class="mx-auto">
           <h2 class="text-white mt-3">¿Deseas eliminar tu cuenta?</h2>
-          <form action="" method="POST">
-            <input type="submit" name="Si" value="Si, deseo borrarla" class="btn btn-danger">
-            <input type="submit" name="No" value="no,no quiero eliminarla" class="btn btn-success">
+          <form form method="POST" action="mi_cuenta.php">
+            <input type="submit" name="si" value="Si, deseo borrarla" class="btn btn-danger">
+            <input type="submit" name="No" value="No,no quiero eliminarla" class="btn btn-success">
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <?php
-        include("includes/footer.php");
-    ?>
+  include("includes/footer.php");
+?>
 <!-- <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfQH5MI5OoDLFr-oj5TxUAd2rr9nU3ico&libraries=places&callback=initAutocomplete"
     async defer></script> -->
@@ -318,6 +321,20 @@
   integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
   integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<?php
+  if(isset($_POST['si'])){
+    $usuario = $_SESSION['NOMBRE_USUARIO'];
+    global $db;
 
+    $elimina= "CALL eliminausuario('$usuario')";
+    $res_elimina = mysqli_query($db,$elimina);
+
+    if($res_elimina){
+      echo "<script>alert('Se elimino la cuenta')</script>";
+      session_destroy();
+      echo "<script>window.open('index.php','_self')</script>";
+    }
+  }
+?>
 </body>
 </html>

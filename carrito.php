@@ -11,7 +11,7 @@
                         <h1 class="mt-5">Carrito de compra</h1>
                         <?php 
                             $ip_add = getRealIpUser();
-                            $select_cart = "SELECT * FROM detpedido WHERE IDPEDIDO = '$ip_add'";
+                            $select_cart = "SELECT * FROM detpedido WHERE IP_ADD = '$ip_add'";
                             $run_cart = mysqli_query($db,$select_cart);
                             $count = mysqli_num_rows($run_cart);
                         ?>
@@ -67,7 +67,11 @@
                                         </td>
 
                                     </tr>
-                                    <?php } } ?>
+                                    <?php } 
+                                        $sub = "SELECT IVA(1200)";
+                                        $res_sub = mysqli_query($db,$sub);
+ 
+                                } ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -130,8 +134,8 @@
                                     <td>$0</td>
                                 </tr>
                                 <tr>
-                                    <td>Impuestos</td>
-                                    <th>$0</th>
+                                    <td>Sub+IVA</td>
+                                    <th>$ <?php echo $sub;?></th>
                                 </tr>
                                 <tr class="total">
                                     <td>Total</td>

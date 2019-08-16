@@ -18,6 +18,7 @@
                         <select name="CAT" class="form-control" >
                         <option> Seleccione una categoria</option>
                         <?php
+                        mysqli_set_charset($db,"utf8");
                             $get_categoria = "SELECT * FROM categoria";
                             $resultado_categoria = mysqli_query($db,$get_categoria);
 
@@ -37,6 +38,12 @@
                     <label class="col-md-6">MARCA</label>
                     <div class="col-md-6">
                         <input type="text" name="MARCA" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group row justify-content-md-center">
+                    <label class="col-md-6">CANTIDAD INGRESADA</label>
+                    <div class="col-md-6">
+                        <input type="text" name="cantidad" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-group row justify-content-md-center">
@@ -98,6 +105,7 @@
         $caracteristica = $_POST["CARACTERISTICAS"];
         $precio = $_POST["PRECIO"];
         $descripcion = $_POST["DESCRIPCION"];
+        $cantidad = $_POST["cantidad"];
 
         $img1 = $_FILES['img1']['name'];
         $img2 = $_FILES['img2']['name'];
@@ -115,7 +123,7 @@
         move_uploaded_file($name4_temp,"img_prod/$img4");
      
 
-        $insertar_producto = "INSERT INTO producto(IDCATEGORIA,NOMBRE_P,MARCA,CARACTERISTICAS,PRECIO,DESCRIPCION,img1,img2,img3,img4) VALUES ($categoria,'$nombproducto','$marca','$caracteristica',$precio,'$descripcion','$img1','$img2','$img3','$img4')";
+        $insertar_producto = "CALL insertaproducto($categoria,'$nombproducto','$marca',$cantidad,'$caracteristica',$precio,'$descripcion','$img1','$img2','$img3','$img4')";
 
         $guardar_producto = mysqli_query($db,$insertar_producto);
 

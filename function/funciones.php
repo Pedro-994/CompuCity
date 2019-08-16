@@ -20,24 +20,27 @@
     
     if(isset($_GET['add_cart'])){
         
+        $id = $_SESSION['IDUSUARIO'];
         $ip_add = getRealIpUser();
         
         $p_id = $_GET['add_cart'];
         
         $product_qty = $_POST['cantidad'];
         
-        $check_product = "SELECT * from detpedido where IDPEDIDO='$ip_add' AND IDPRODUCTO='$p_id'";
+        $check_product = "SELECT * from detpedido where IP_ADD ='$ip_add' AND IDPRODUCTO='$p_id'";
         
         $run_check = mysqli_query($db,$check_product);
         
         if(mysqli_num_rows($run_check)>0){
             
-            echo "<script>alert('Este producto ya existe en tu carrito')</script>";
+            $query = "UPDATE detpedido set CANTIDAD_PROD = CANTIDAD_PROD +$product_qty where IDPRODUCTO = $p_id ";
+            $run_query = mysqli_query($db,$query);
+            echo "<script>alert('Se actualizo la cantidad de unidades de un producto ya existente')</script>"; 
             echo "<script>window.open('detalles.php?id_prod=$p_id','_self')</script>";
             
         }else{
             
-            $query = "INSERT INTO detpedido (IDPRODUCTO,IDPEDIDO,CANTIDAD_PROD) values ('$p_id','$ip_add','$product_qty')";
+            $query = "INSERT INTO detpedido (IDPRODUCTO,IP_ADD,CANTIDAD_PROD) values ('$p_id','$ip_add','$product_qty')";
             
             $run_query = mysqli_query($db,$query);
             
@@ -52,7 +55,7 @@
     function getPro(){
         global $db;
         mysqli_set_charset($db,"utf8");
-        $get_producto = "SELECT * FROM producto";
+        $get_producto = "SELECT * FROM producto where ESTADO = 'Disponible'";
         $resultado_producto = mysqli_query($db,$get_producto);
         if(mysqli_connect_errno()){
             echo "Error al conectar a la Base de datos";
@@ -133,17 +136,15 @@
             $row_p_cat = mysqli_fetch_array($run_p_cat);
             $p_cat_title = $row_p_cat['NOMBRECAT'];
             $p_cat_desc = $row_p_cat['DESCRIPCIONCAT'];
-            $get_products ="SELECT * FROM PRODUCTO where IDCATEGORIA='$p_cat_id'";
+            $get_products ="SELECT * FROM producto where IDCATEGORIA='$p_cat_id'";
         
         $run_products = mysqli_query($db,$get_products);
             $count = mysqli_num_rows($run_products);
             if($count==0){
             
                 echo "
-                    <div class= 'mt-5'>
-                    
+                    <div class= 'mt-5'>  
                         <h1 class='display-4'> No se encontraron productos en esta categoria </h1>
-                    
                     </div>
                 ";
                 
@@ -152,19 +153,13 @@
                 echo "
                 
                     <div class='mt-5'>
-                    
                         <h class='display-4'> $p_cat_title </h>
-                        
                         <p> $p_cat_desc </p>
-                    
                     </div>
                 
-                ";
-                
+                "; 
             }
         }
-
-
     }
     
 function getpcatpro(){
@@ -189,7 +184,6 @@ function getpcatpro(){
 
             
             echo "
-            
             <div class='producto col-lg-4 col-md-6 col-sm-6 mb-4'>
             <div class='card align-items-center'>
                 <img class='card-img-top'
@@ -209,10 +203,8 @@ function getpcatpro(){
                 </div>
             </div>
         </div>";            
-        }
-        
-    }
-    
+        }   
+    }  
 }
 
 ?>

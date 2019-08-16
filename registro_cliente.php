@@ -10,7 +10,7 @@
         </div>
         <div class="textbox">
             <i class="fas fa-at"></i>
-            <input type="text" placeholder="Email" name="email" required> 
+            <input type="email" name = "email" aria-describedby="emailHelp" placeholder="Email" required>
         </div>
         <div class="textbox">
             <i class="fas fa-lock"></i>
@@ -23,7 +23,10 @@
         <div class="text-center"><!-- text-center Begin -->   
             <button type="submit" name="Registro" class="btn btn-block btn-outline-success">
                 <i class="fa fa-user-md"></i> Registrar
-            </button>                       
+            </button>
+            <a href="login.php">
+    <p class="text-muted">Ya tienes una cuenta? Inicia sesion. </p>
+    </a>                      
         </div><!-- text-center Finish -->
         </form><!-- form Finish -->
 
@@ -43,46 +46,31 @@ if(isset($_POST['Registro'])){
     $c_name = $_POST['user'];
     $c_email = $_POST['email'];
     $c_pass = $_POST['password'];
-    $c_pass2 = $_POST['password'];
-        if(strcmp(!$c_pass,$c_pass2)){
+    $c_pass2 = $_POST['password2'];
+        if(strcmp($c_pass,$c_pass2)){
             echo "<script>alert('La contraseñas no coinciden')</script>";
             echo "<script>window.open('registro_cliente.php','_self')</script>";
         }else{
           $c_ip = getRealIpUser();
-          
-    $insert_customer = "INSERT INTO usuario(NOMBRE_USUARIO,CORREO,CONTRASENIA) values ('$c_name','$c_email','$c_pass')";
-    
-    $run_customer = mysqli_query($db,$insert_customer);
-    
-    $sel_cart = "SELECT * FROM detpedido where IDPRODUCTO='$c_ip'";
-    
-    $run_cart = mysqli_query($db,$sel_cart);
-    
-    $check_cart = mysqli_num_rows($run_cart);
-    
-    if($check_cart>0){
-        
-        /// If register have items in cart ///
-        
-        $_SESSION['NOMBRE_USUARIO']=$c_name;
-        
-        echo "<script>alert('Registro exitoso')</script>";
-        
-        echo "<script>window.open('login.php','_self')</script>";
-        
-    }else{
-        
-        /// If register without items in cart ///
-        
+          $c_pass = password_hash($c_pass,PASSWORD_DEFAULT,['cost' => 10]);
+
+    $insert_cliente = "CALL creausuario('$c_name','$c_pass','$c_email')";
+
+    $run_cliente = mysqli_query($db,$insert_cliente);    
+
+    if($run_cliente){
+                
         $_SESSION['NOMBRE_USUARIO']=$c_name;
         
         echo "<script>alert('Registro exitoso')</script>";
         
         echo "<script>window.open('index.php','_self')</script>";
+    }else{
+        echo "<script>alert('No se pudo realizar el registro')</script>";
         
-    } 
-        }
-    
+        echo "<script>window.open('index.php','_self')</script>";
+    }
+    }
 }
 
 ?>

@@ -18,7 +18,7 @@
         <i class="fa fa-sign-in"></i> Login
       </button>
     </div>
-    </form>
+</form>
     <a href="registro_cliente.php">
     <p class="text-muted">Aun no estas registrado..? Registrate ahora </p>
     </a>
@@ -42,49 +42,29 @@
 if(isset($_POST['login'])){
     
     $username = $_POST['username'];
-    
     $pass = $_POST['pass'];
     
-    $select_customer = "SELECT * FROM usuario where NOMBRE_USUARIO='$username' AND CONTRASENIA='$pass'";
+    $select_cliente = "SELECT NOMBRE_USUARIO,CONTRASENIA FROM usuario where NOMBRE_USUARIO='$username'";
     
-    $run_customer = mysqli_query($db,$select_customer);
-    
+    $run_cliente = mysqli_query($db,$select_cliente);
     $get_ip = getRealIpUser();
-    
-    $check_customer = mysqli_num_rows($run_customer);
-    
-    $select_cart = "SELECT * from detpedido WHERE IDPRODUCTO='$get_ip'";
-    
-    $run_cart = mysqli_query($db,$select_cart);
-    
-    $check_cart = mysqli_num_rows($run_cart);
-    
-    if($check_customer==0){
-        
-        echo "<script>alert('Usuario o contraseña incorrectos')</script>";
-        
-        exit();
-        
-    }
-    
-    if($check_customer==1 AND $check_cart==0){
-        
-        $_SESSION['NOMBRE_USUARIO']=$username;
-        
-       echo "<script>alert('Usted está conectado')</script>"; 
-        
-       echo "<script>window.open('index.php', '_self')</script>";
-        
+    $check_cliente = mysqli_num_rows($run_cliente);
+
+    $fila = mysqli_fetch_array($run_cliente);
+    $contraseña = $fila['CONTRASENIA'];
+    $veri = password_verify($pass,$contraseña);
+    if(!$check_cliente){
+      echo "<script>alert('Usuario o contraseña incorrectos')</script>";
+      exit();
+    }else if(!$veri){
+      echo "<script>alert('Usuario o contraseña incorrectos')</script>";
+      exit();
     }else{
-        
-        $_SESSION['NOMBRE_USUARIO']=$username;
-        
-       echo "<script>alert('Usted está conectado')</script>"; 
-        
-       echo "<script>window.open('index.php', '_self')</script>";
-        
+      $_SESSION['NOMBRE_USUARIO']=$username;
+      echo "<script>alert('Usted está conectado')</script>"; 
+      echo "<script>window.open('index.php', '_self')</script>"; 
     }
-    
 }
 
-?>
+?> 
+

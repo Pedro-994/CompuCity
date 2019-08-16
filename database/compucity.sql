@@ -1,7 +1,7 @@
 CREATE DATABASE COMPUCITY;
 USE COMPUCITY;
 
-CREATE TABLE USUARIO(
+CREATE TABLE usuario(
     IDUSUARIO INT(5) PRIMARY KEY AUTO_INCREMENT,
     NOMBRE VARCHAR(20),
     APELLIDO_PU VARCHAR(20),
@@ -14,29 +14,37 @@ CREATE TABLE USUARIO(
     CALLE VARCHAR(30),
     FECHA_NAC DATE,
     TELEFONO VARCHAR(10),
-    CONTRASENIA VARCHAR(15),
+    CONTRASENIA VARCHAR(255),
     CORREO VARCHAR(40) UNIQUE,
     CODIGO_POSTAL VARCHAR(5),
     NUMERO_INT VARCHAR(4),
     NUMERO_EXT VARCHAR(4)
 );
-
+DELETE FROM usuario where idusuario=11;
  CREATE TABLE CATEGORIA(
 	IDCATEGORIA INT(5) PRIMARY KEY AUTO_INCREMENT,
     NOMBRECAT VARCHAR(30),
     DESCRIPCIONCAT TEXT
  );
+ 
+ CREATE TABLE administrador(
+	idadmin int PRIMARY KEY AUTO_INCREMENT,
+    correoa varchar(25),
+    nombrea varchar(25),
+    passa varchar(255)
+ );
   
-CREATE TABLE PEDIDO(
+CREATE TABLE pedido(
     IDPEDIDO INT(5) PRIMARY KEY AUTO_INCREMENT,
     FECHA_CREACION DATE,
     SUBTOTAL FLOAT,
     TOTAL FLOAT,
     IDUSUARIO INT(5),
+    FECHA timestamp default CURRENT_TIMESTAMP,
     FOREIGN KEY(IDUSUARIO) REFERENCES USUARIO(IDUSUARIO)
 ); 
 
-CREATE TABLE PRODUCTO(
+CREATE TABLE producto(
     IDPRODUCTO INT(5) PRIMARY KEY AUTO_INCREMENT,
     IDCATEGORIA INT(5),
     NOMBRE_P VARCHAR(100),
@@ -56,8 +64,9 @@ CREATE TABLE PRODUCTO(
     FOREIGN KEY(IDCATEGORIA) REFERENCES CATEGORIA(IDCATEGORIA)
 );
  
-CREATE TABLE DETPEDIDO(
+CREATE TABLE detpedido(
     IDDETALLE INT(5) PRIMARY KEY AUTO_INCREMENT,
+	IP_ADD VARCHAR(255),
     IDPEDIDO INT(5),
     IDPRODUCTO INT(5),
     ESTATUS VARCHAR(10),
@@ -68,7 +77,7 @@ CREATE TABLE DETPEDIDO(
     FOREIGN KEY(IDPRODUCTO) REFERENCES PRODUCTO(IDPRODUCTO)
 );
  
-CREATE TABLE TARJETA(
+CREATE TABLE tarjeta(
     IDTARJETA INT(10) PRIMARY KEY,
     NOMBRE_T VARCHAR(20),
     APELLIDO_PT VARCHAR(20),
@@ -83,7 +92,7 @@ CREATE TABLE TARJETA(
 /*Funciones*/
 /*Funcion para realizar descuento*/
 DELIMITER $$
-CREATE FUNCTION DESCUENTO(sub FLOAT,descu INT)
+CREATE FUNCTION descuento(sub FLOAT,descu INT)
 RETURNS FLOAT
 BEGIN
 DECLARE descuento float;
@@ -92,30 +101,32 @@ RETURN (sub-descuento);
 END $$
 /*Funcion para calcular IVA*/
 DELIMITER $$
-CREATE FUNCTION IVA(SUB FLOAT)
+CREATE FUNCTION iva(SUB FLOAT)
 RETURNS FLOAT
 BEGIN
 RETURN (SUB*1.16);
 END $$
+
 /*Funcion para calcular SUBTOTAL*/
 DELIMITER $$
-CREATE FUNCTION SUBTOTAL(SUB FLOAT)
+CREATE FUNCTION subtotal(SUB FLOAT)
 RETURNS FLOAT
 BEGIN
 DECLARE SUB FLOAT;
-SET SUB = (SELECT SUM(PRECIO) FROM PRODUCTO WHERE IDPRODUCTO = (SELECT IDPRODUCTO FROM DETPEDIDO WHERE IDPEDIDO = (SELECT IDPEDIDO FROM PEDIDO)));
+SET SUB = (SELECT SUM(PRECIO) FROM producto WHERE IDPRODUCTO = (SELECT IDPRODUCTO FROM detpedido WHERE IDPEDIDO = (SELECT idpedido FROM PEDIDO)));
 RETURN SUB;
 END $$
 /*Procedimientos*/
 /*Procedimiento creacion usuario*/
 DELIMITER $$
-CREATE PROCEDURE CREAUSUARIO(IN NOMBRE VARCHAR(20),CONTRASENIA VARCHAR(40),CORREO VARCHAR(30))
+CREATE PROCEDURE creausuario(IN NOMBRE VARCHAR(20),CONTRASENIA VARCHAR(255),CORREO VARCHAR(40))
 BEGIN
-INSERT INTO USUARIO(NOMBRE_USUARIO,CONTRASENIA,CORREO) VALUES (NOMBRE,CONTRASENIA,CORREO);
+INSERT INTO usuario(NOMBRE_USUARIO,CONTRASENIA,CORREO) VALUES (NOMBRE,CONTRASENIA,CORREO);
 END $$
+
 /*Procedimiento completar datos usuario*/
 DELIMITER $$
-CREATE PROCEDURE COMPLETADATOS(ID INT(5),
+CREATE PROCEDURE completadatos(ID INT(5),
     NOM VARCHAR(20),
     APP VARCHAR(20),
     APM VARCHAR(20),
@@ -129,13 +140,12 @@ CREATE PROCEDURE COMPLETADATOS(ID INT(5),
     NUMI VARCHAR(4),
     NUME VARCHAR(4))
 BEGIN
-	UPDATE USUARIO SET NOMBRE = NOM, APELLIDO_PU = APP,APELLIDO_MU = APM, ESTADO = EST,CIUDAD = CIU,COLONIA = COL,CALLE = CAL,
-    FECHA_NAC = FECHA,TELEFONO = TEL,CODIGO_POSTAL = CP,NUMERO_INT =NUMI,NUMERO_EXT = NUME  WHERE USUARIO.IDUSUARIO = ID;
+	UPDATE usuario SET NOMBRE = NOM, APELLIDO_PU = APP,APELLIDO_MU = APM, ESTADO = EST,CIUDAD = CIU,COLONIA = COL,CALLE = CAL,
+    FECHA_NAC = FECHA,TELEFONO = TEL,CODIGO_POSTAL = CP,NUMERO_INT =NUMI,NUMERO_EXT = NUME  WHERE usuario.IDUSUARIO = ID;
 END $$
 /*Procedimiento inserta Producto*/
-
 DELIMITER $$
-CREATE PROCEDURE INSERTAPRODUCTO(
+CREATE PROCEDURE insertaproducto(
     IDCATEGORIA INT(5),
     NOMBRE_P VARCHAR(100),
     MARCA VARCHAR(15),
@@ -148,19 +158,27 @@ CREATE PROCEDURE INSERTAPRODUCTO(
     img3 TEXT,
     img4 TEXT)
 BEGIN
-	INSERT INTO PRODUCTO(IDCATEGORIA,NOMBRE_P,MARCA,CANTIDAD_ALMACEN,
+	INSERT INTO producto(IDCATEGORIA,NOMBRE_P,MARCA,CANTIDAD_ALMACEN,
     CARACTERISTICAS,PRECIO,DESCRIPCION,ESTADO,img1,img2,img3,img4) VALUES (IDCATEGORIA,NOMBRE_P,MARCA,CANTIDAD_ALMACEN,
     CARACTERISTICAS,PRECIO,DESCRIPCION,"Disponible",img1,img2,img3,img4);
 END $$
 /*Procedimiento inserta categoria*/
 DELIMITER $$
-CREATE PROCEDURE INSERTACATEGORIA(
+CREATE PROCEDURE insertacategoria(
 	NOMBRECAT VARCHAR(30),
     DESCRIPCIONCAT TEXT(300)
  )
 BEGIN
-INSERT INTO CATEGORIA VALUES (NOMBRECAT,DESCRIPCIONCAT);
+INSERT INTO categoria VALUES (null,NOMBRECAT,DESCRIPCIONCAT);
 END $$
+/*Eliminar usuario*/
+DELIMITER $$
+CREATE PROCEDURE eliminausuario(NOMBRE VARCHAR(30))
+BEGIN
+DELETE FROM usuario WHERE  NOMBRE_USUARIO = NOMBRE;
+END $$
+
+CALL eliminausuario('a');
 /*Procedimiento creacion pedido*/
 DELIMITER $$
 CREATE PROCEDURE INSERTAPEDIDO(FECHA DATE ,SUBTOTAL FLOAT,TOTAL FLOAT,IDUSUARIO INT(5))
@@ -216,10 +234,11 @@ BEGIN
 END //
 /*Disparador baja logica cuando stock=0*/
 DELIMITER //
-CREATE TRIGGER STOCKZERO BEFORE UPDATE ON PRODUCTO FOR EACH ROW
+CREATE TRIGGER STOCK BEFORE UPDATE ON PRODUCTO FOR EACH ROW
 BEGIN
 	IF(NEW.CANTIDAD_ALMACEN<1) THEN
 		 SET NEW.ESTADO = "NO DISPONIBLE";
+	else SET NEW.ESTADO = "Disponible";
 	END IF;
 END //
 /*Disparador COMPRA 0 */
@@ -238,18 +257,6 @@ CREATE TRIGGER NUMEROPEDIDO BEFORE INSERT ON pedido FOR EACH ROW
 BEGIN
 	UPDATE USUARIO SET NUMPEDIDO = NUMPEDIDO+1 WHERE IDUSUARIO = NEW.IDUSUARIO;
 END //
-drop trigger NUMEROPEDIDO
-INSERT INTO PEDIDO(TOTAL,IDUSUARIO) VALUES (100,5)
-
-
-/*funcion muestre cantidad adquiridos por el cliente*/
-DELIMITER //
-
-
-/*MOSTRAR PEDIDOS REALIZADOS POR EL CLIENTE Y SUS DATOS */
-DELIMITER //
- 
-
 
 CALL INSERTACATEGORIA('Tarjeta grafica','Tarjeta grafica');
 CALL INSERTACATEGORIA('Procesador','Procesador amd, intel');
@@ -777,7 +784,7 @@ CALL COMPLETADATOS(10, 'Forrest', 'Loy', 'Coplestone', 'Michigan', 'Farmington',
 CALL COMPLETADATOS(11, 'Rebekah', 'Gracewood', 'Baldree', 'California', 'San Diego', 'Gina', '1st', '2019-05-11', '6191895025', 3202, 18, 47);
 CALL COMPLETADATOS(12, 'Veradis', 'Schafer', 'Niesegen', 'Mississippi', 'Columbus', 'West', 'Thompson', '2019-07-19', '6624224122', 5960, 85, 56);
 CALL COMPLETADATOS(13, 'Eal', 'Whitington', 'Cady', 'Texas', 'El Paso', 'Gale', 'Clyde Gallagher', '2018-09-13', '9159495638', 8949, 24, 12);
-CALL COMPLETADATOS(14, 'Dru', 'Arnholz', 'Bartomieu', 'District of Columbia', 'Washington', 'American', 'Milwaukee', '2019-03-19', '2021426798', 8152, 57, 65);
+CALL COMPLETADATOS(14, 'Dru', 'a', 'a', 'District of Columbia', 'Washington', 'American', 'Milwaukee', '2019-03-19', '2021426798', 8152, 57, 65);
 CALL COMPLETADATOS(15, 'Misty', 'todor', 'Fruchon', 'Florida', 'Tallahassee', 'Donald', 'Lawn', '2018-10-26', '8509360449', 3261, 37, 82);
 CALL COMPLETADATOS(16, 'Gill', 'Creus', 'Marney', 'Oregon', 'Portland', '4th', 'Magdeline', '2018-09-14', '5031738065', 7102, 8, 93);
 CALL COMPLETADATOS(17, 'Nariko', 'Hebden', 'Shird', 'California', 'San Diego', 'Mayer', 'Lyons', '2019-06-22', '6195553131', 4680, 74, 30);
@@ -1055,18 +1062,18 @@ CALL INSERTAPRODUCTO (1,'AMD Radeon VII Gaming','ASRock',5,'CARACTERISTICAS',247
 /*Producto*/
 CREATE TABLE BITACORA_PRODUCTO(
 idbp int primary key auto_increment,
-idproducto int,
-fecha timestamp default CURRENT_TIMESTAMP,
-ejecutor varchar(25),
-actividad_realizada varchar(255),
-informacion_actual varchar(250),
-informacion_anterior varchar(250)
+idproductop int,
+fechap timestamp default CURRENT_TIMESTAMP,
+ejecutorp varchar(25),
+actividad_realizadap varchar(255),
+informacion_actualp varchar(250),
+informacion_anteriorp varchar(250)
 );
 
 DELIMITER //
 CREATE TRIGGER bitacoraproducto AFTER INSERT ON producto FOR EACH ROW
 BEGIN
-	INSERT INTO bitacora_producto(idproducto,ejecutor,actividad_realizada,informacion_actual) values(new.idproducto,current_user,"Se inserto nuevo producto",
+	INSERT INTO bitacora_producto(idproductop,ejecutorp,actividad_realizadap,informacion_actualp) values(new.idproducto,current_user,"Se inserto nuevo producto",
     concat("Informacion actual: ",new.idcategoria," ",new.nombre_p," ",new.marca,
 			" ",new.CANTIDAD_ALMACEN," ",new.CARACTERISTICAS," ",new.precio," ",new.descripcion," ",
 			new.img1," ",new.img2," ",new.img3," ",new.img4));
@@ -1075,22 +1082,22 @@ END //
 DELIMITER //
 CREATE TRIGGER bitacoraproductoDel after DELETE ON producto FOR EACH ROW
 BEGIN 
-	INSERT INTO bitacora_producto(idproducto,ejecutor,actividad_realizada,informacion_anterior) values(old.idproducto,current_user,"Se elimino un producto",
+	INSERT INTO bitacora_producto(idproductop,ejecutorp,actividad_realizadap,informacion_anteriorp) values(old.idproducto,current_user,"Se elimino un producto",
     concat("Informacion anterior: ",old.idcategoria," ",old.nombre_p," ",old.marca,
 			" ",old.CANTIDAD_ALMACEN," ",old.CARACTERISTICAS," ",old.precio," ",old.descripcion," ",
 			old.img1," ",old.img2," ",old.img3," ",old.img4));
 END //
+
 DELIMITER //
 CREATE TRIGGER bitacoraproductoUP after UPDATE ON producto FOR EACH ROW
 BEGIN
-	INSERT INTO bitacora_producto(idproducto,ejecutor,actividad_realizada,informacion_actual,informacion_anterior) values(new.idproducto,current_user,"Se actualizo producto",
+	INSERT INTO bitacora_producto(idproductop,ejecutorp,actividad_realizadap,informacion_actualp,informacion_anteriorp) values(new.idproducto,current_user,"Se actualizo producto",
     concat("Informacion actual: ",new.idcategoria," ",new.nombre_p," ",new.marca,
 			" ",new.CANTIDAD_ALMACEN," ",new.CARACTERISTICAS," ",new.precio," ",new.descripcion," ",
 			new.img1," ",new.img2," ",new.img3," ",new.img4),concat("Informacion anterior: ",old.idcategoria," ",old.nombre_p," ",old.marca,
-			" ",old.CANTIDAD_ALMACEN," ",old.CARACTERISTICAS," ",old.precio," ",old.descripcion," ",
-			old.img1," ",old.img2," ",old.img3," ",old.img4));
+			" ",old.CANTIDAD_ALMACEN," ",old.CARACTERISTICAS," ",old.precio," ",old.descripcion));
 END //
-
+ 
 CREATE TABLE BITACORA_PEDIDO(
 idbp int primary key auto_increment,
 idpedido int,
@@ -1100,6 +1107,7 @@ actividad_realizada varchar(255),
 informacion_actual varchar(250),
 informacion_anterior varchar(250)
 );
+
 DELIMITER //
 CREATE TRIGGER bitacorapedidoINS AFTER INSERT ON pedido FOR EACH ROW
 BEGIN
@@ -1120,39 +1128,37 @@ BEGIN
 	INSERT INTO bitacora_pedido(idpedido,ejecutor,actividad_realizada,informacion_actual,informacion_anterior) values(new.idpedido,current_user,"Se actualizo pedido",
     concat("Informacion actual: ",new.SUBTOTAL," ",new.TOTAL," ",new.IDUSUARIO),concat("Informacion anterior: ",old.SUBTOTAL," ",old.TOTAL," ",old.IDUSUARIO));
 END //
+
 CREATE TABLE BITACORA_USUARIO(
-idbp int primary key auto_increment,
-idusuario int,
-fecha timestamp default CURRENT_TIMESTAMP,
-ejecutor varchar(25),
-actividad_realizada varchar(255),
-informacion_actual varchar(250),
-informacion_anterior varchar(250)
+idbu int primary key auto_increment,
+idusuariou int,
+fechau timestamp default CURRENT_TIMESTAMP,
+ejecutoru varchar(25),
+actividad_realizadau varchar(255),
+informacion_actualu varchar(250),
+informacion_anterioru varchar(250)
 );
 
 DELIMITER //
 CREATE TRIGGER bitacorausuarioINS AFTER INSERT ON usuario FOR EACH ROW
 BEGIN
-	INSERT INTO bitacora_usuario(idusuario,ejecutor,actividad_realizada,informacion_actual) values(new.idusuario,current_user,"Se Inserto usuario",
-    concat("Informacion actual: ",new.NOMBRE," ",new.APELLIDO_PU," ",new.APELLIDO_MU,
-    " ",new.NUMPEDIDO," ",new.NOMBRE_USUARIO," ",new.ESTADO," ",new.CIUDAD," ",new.COLONIA," ",new.calle," "
-    ,new.FECHA_NAC," ",new.TELEFONO," ",new.CONTRASENIA," ",new.CORREO," ",new.CODIGO_POSTAL," ",new.NUMERO_INT," ",new.NUMERO_ext));
+	INSERT INTO bitacora_usuario(idusuariou,ejecutoru,actividad_realizadau,informacion_actualu) values(new.idusuario,current_user,"Se Inserto usuario",
+    concat("Informacion actual: ",new.CORREO," ",new.NOMBRE_USUARIO," ",new.CONTRASENIA));
 END //
 
 DELIMITER //
 CREATE TRIGGER bitacorausuarioDEL AFTER DELETE ON usuario FOR EACH ROW
 BEGIN
-	INSERT INTO bitacora_usuario(idusuario,ejecutor,actividad_realizada,informacion_anterior) values(old.idusuario,current_user,"Se elimino usuario",
-    concat("Informacion anterior: ",old.NOMBRE," ",old.APELLIDO_PU," ",old.APELLIDO_MU,
-    " ",old.NUMPEDIDO," ",old.NOMBRE_USUARIO," ",old.ESTADO," ",old.CIUDAD," ",old.COLONIA," ",old.calle," "
-    ,old.FECHA_NAC," ",old.TELEFONO," ",old.CONTRASENIA," ",old.CORREO," ",old.CODIGO_POSTAL," ",old.NUMERO_INT," ",old.NUMERO_ext));
+	INSERT INTO bitacora_usuario(idusuariou,ejecutoru,actividad_realizadau,informacion_anterioru) values(old.idusuario,current_user,"Se elimino usuario",
+    concat("Informacion anterior: ",old.CORREO," ",old.NOMBRE_USUARIO," ",old.CONTRASENIA));
 END //
+
 DELIMITER //
 CREATE TRIGGER bitacorausuarioUP AFTER update ON usuario FOR EACH ROW
 BEGIN
-	INSERT INTO bitacora_usuario(idusuario,ejecutor,actividad_realizada,informacion_actual,informacion_anterior) values(new.idusuario,current_user,"Se actualizo usuario",
+	INSERT INTO bitacora_usuario(idusuariou,ejecutoru,actividad_realizadau,informacion_actualu,informacion_anterioru) values(new.idusuario,current_user,"Se actualizo usuario",
     concat("Informacion actual: ",new.NOMBRE," ",new.APELLIDO_PU," ",new.APELLIDO_MU,
-    " ",new.NUMPEDIDO," ",new.NOMBRE_USUARIO," ",new.ESTADO," ",new.CIUDAD," ",new.COLONIA," ",new.calle," "
+    " ",new.NUMPEDIDO," ",new.NOMBRE_USUARIO," ",new.ESTADO," ",new.CIUDAD," ",new.COLONIA," ",new.CALLE," "
     ,new.FECHA_NAC," ",new.TELEFONO," ",new.CONTRASENIA," ",new.CORREO," ",new.CODIGO_POSTAL," ",new.NUMERO_INT," ",new.NUMERO_ext),concat("Informacion anterior: ",old.NOMBRE," ",old.APELLIDO_PU," ",old.APELLIDO_MU,
     " ",old.NUMPEDIDO," ",old.NOMBRE_USUARIO," ",old.ESTADO," ",old.CIUDAD," ",old.COLONIA," ",old.calle," "
     ,old.FECHA_NAC," ",old.TELEFONO," ",old.CONTRASENIA," ",old.CORREO," ",old.CODIGO_POSTAL," ",old.NUMERO_INT," ",old.NUMERO_ext));
