@@ -79,16 +79,20 @@ if(!isset($_SESSION['NOMBRE_USUARIO'])){
       <div class="row">
         <div class="mx-auto">
           <h2 class="text-white mt-3">Cambiar Contraseña</h2>
+
+          <form form method="POST" action="mi_cuenta.php">
           <div class="form-group textbox">
-            <input type="password" placeholder="Contraseña actual">
+            <input type="password" placeholder="Contraseña actual" name="pass">
           </div>
           <div class="form-group textbox">
-            <input type="password" placeholder="Nueva Contraseña">
+            <input type="password" placeholder="Nueva Contraseña" name="new1">
           </div>
           <div class="form-group textbox">
-            <input type="password" placeholder="Confirmar Contraseña">
+            <input type="password" placeholder="Confirmar Contraseña" name="new2">
           </div>
-          <button type="submit" class="btn btn-block btn-outline-success">Guardar</button>
+          <button type="submit" name = "changepass"class="btn btn-block btn-outline-success">Guardar</button>
+          </form>
+
         </div>
       </div>
     </div>
@@ -335,6 +339,38 @@ if(!isset($_SESSION['NOMBRE_USUARIO'])){
       echo "<script>window.open('index.php','_self')</script>";
     }
   }
+
+  if(isset($_POST['changepass'])){
+    $pass = $_POST['pass'];
+    $new = $_POST['new1'];
+    $confirm = $_POST['new2'];
+    $nombre = $_SESSION['NOMBRE_USUARIO'];
+
+    $select_cliente = "SELECT CONTRASENIA FROM usuario where NOMBRE_USUARIO='$nombre'";
+    
+    $run_query= mysqli_query($db,$select_cliente);
+    $fila = mysqli_fetch_array($run_query);
+    $contraseña = $fila['CONTRASENIA'];
+
+    $veri = password_verify($pass,$contraseña);
+    if($veri){
+      if(strcmp($new,$confirm)){
+        echo "<script>alert('La contraseñas no coinciden')</script>";
+        echo "<script>window.open('mi_cuenta.php','_self')</script>";
+      }else{
+        $nueva = password_hash($new,PASSWORD_DEFAULT,['cost' => 10]);
+        $cambio = "CALL cambiopass('$nombre','$nueva')";    
+        $run_cambio = mysqli_query($db,$cambio);  
+        echo "<script>alert('Contraseña actualizada')</script>";
+        include('logout.php');
+      }
+    }else{
+      echo "<script>alert('No se pudo realizar la solicitud')</script>";
+      echo "<script>window.open('mi_cuenta.php', '_self')</script>"; 
+    } 
+  }
 ?>
+
+
 </body>
 </html>

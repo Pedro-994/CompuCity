@@ -24,6 +24,7 @@
         $name = $row_p['NOMBRE_P'];
         $price = $row_p['PRECIO'];
         $pro_desc = $row_p['DESCRIPCION'];
+        $pro_caract = $row_p['CARACTERISTICAS'];
     
         $get_p_cat = "SELECT * from categoria where IDCATEGORA='$p_cat_id'";
         
@@ -64,11 +65,8 @@
                             class="fas fa-home"></i></a>
                 </li>
                 <?php 
-                   
-                   if(!isset($_SESSION['NOMBRE_USUARIO'])){
-                       
-                       echo "<li class='nav-item '><a class='nav-link text-white'>Bienvenido : Invitado</a></li>";
-                       
+                   if(!isset($_SESSION['NOMBRE_USUARIO'])){ 
+                       echo "<li class='nav-item '><a class='nav-link text-white'>Bienvenido : Invitado</a></li>"; 
                    }else{
                        $nombre = $_SESSION['NOMBRE_USUARIO'];
                        echo "<li class='nav-item '><a class='nav-link text-white'>Bienvenido : $nombre </a></li>";                       
@@ -82,7 +80,6 @@
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar Producto" aria-label="Search">
                 <button class="btn text-white my-2 my-sm-0" type="submit"><i class="fas fa-search"></i>
-
                 </button>
             </form>
             <div class="float right">
@@ -90,31 +87,21 @@
                     <li class="nav-item btn-group dropleft ">
                         <a class="nav-link dropdown-toggle text-white " href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                class="far fa-user"></i> Tu
-                            Cuenta</a>
+                                class="far fa-user"></i> Tu Cuenta</a>
                         <div class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
                             <?php 
-                           
-                           if(!isset($_SESSION['NOMBRE_USUARIO'])){
-                       
-                                echo "<a class='dropdown-item' href='login.php'>Iniciar Sesion</a>
-                                <a class='dropdown-item' href='../registro_cliente.php'>Registrarse</a>";
-
-                                
-
-                               }else{
-                                echo "<a class='dropdown-item' href='../mi_cuenta.php'>Mi cuenta</a>
-                                <a class='dropdown-item' href='logout.php'>Cerrar Sesion</a>
-                                <a class='dropdown-item' >Consultar Pedido</a>";
-
-                               }
-                           
-                         ?>                            
+                                if(!isset($_SESSION['NOMBRE_USUARIO'])){
+                                    echo "<a class='dropdown-item' href='login.php'>Iniciar Sesion</a>
+                                    <a class='dropdown-item' href='../registro_cliente.php'>Registrarse</a>";
+                                }else{
+                                    echo "<a class='dropdown-item' href='../mi_cuenta.php'>Mi cuenta</a>
+                                    <a class='dropdown-item' href='logout.php'>Cerrar Sesion</a>
+                                    <a class='dropdown-item' >Consultar Pedido</a>";
+                                }
+                            ?>                            
                         </div>
                     </li>
-                    <li class="nav-item"><a href="../carrito.php" class="nav-link text-white"><i
-                                class="fas fa-shopping-cart"></i></a>
-                    </li>
+                    <li class="nav-item"><a href="../carrito.php" class="nav-link text-white"><i class="fas fa-shopping-cart"></i></a></li>
                 </ul>
             </div>
         </div>

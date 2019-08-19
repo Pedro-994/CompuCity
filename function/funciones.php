@@ -46,10 +46,8 @@
             
             echo "<script>window.open('detalles.php?id_prod=$p_id','_self')</script>";
             
-        }
-        
+        }   
     }
-    
 }
 
     function getPro(){
@@ -149,20 +147,16 @@
                 ";
                 
             }else{
-                
-                echo "
-                
-                    <div class='mt-5'>
+                echo "<div class='mt-5'>
                         <h class='display-4'> $p_cat_title </h>
                         <p> $p_cat_desc </p>
                     </div>
-                
                 "; 
             }
         }
     }
     
-function getpcatpro(){
+    function getpcatpro(){
     
     global $db;
     
@@ -182,7 +176,6 @@ function getpcatpro(){
             $categoria = $fila['IDCATEGORIA'];
             $img = $fila['img1'];
 
-            
             echo "
             <div class='producto col-lg-4 col-md-6 col-sm-6 mb-4'>
             <div class='card align-items-center'>
@@ -205,6 +198,5 @@ function getpcatpro(){
         </div>";            
         }   
     }  
-}
-
+} 
 ?>
