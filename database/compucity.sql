@@ -30,8 +30,8 @@ CREATE TABLE usuario(
  CREATE TABLE administrador(
 	idadmin int PRIMARY KEY AUTO_INCREMENT,
     correoa varchar(25),
-    nombrea varchar(25),
-    passa varchar(255)
+    NOMBREA varchar(25),
+    PASSA varchar(255)
  )ENGINE=InnoDB;
   
 CREATE TABLE pedido(
@@ -41,7 +41,7 @@ CREATE TABLE pedido(
     TOTAL FLOAT,
     IDUSUARIO INT(5),
     FECHA timestamp default CURRENT_TIMESTAMP,
-    FOREIGN KEY(IDUSUARIO) REFERENCES USUARIO(IDUSUARIO)
+    FOREIGN KEY(IDUSUARIO) REFERENCES usuario(IDUSUARIO)
 )ENGINE=InnoDB; 
 
 CREATE TABLE producto(
@@ -61,7 +61,7 @@ CREATE TABLE producto(
     img2 TEXT,
     img3 TEXT,
     img4 TEXT,
-    FOREIGN KEY(IDCATEGORIA) REFERENCES CATEGORIA(IDCATEGORIA)
+    FOREIGN KEY(IDCATEGORIA) REFERENCES categoria(IDCATEGORIA)
 )ENGINE=InnoDB;
  
 CREATE TABLE detpedido(
@@ -73,8 +73,8 @@ CREATE TABLE detpedido(
     INF_ADICIONAL VARCHAR(100),
     CANTIDAD_PROD INT(5),
     FECHA_ENT DATE,
-    FOREIGN KEY(IDPEDIDO) REFERENCES PEDIDO(IDPEDIDO),
-    FOREIGN KEY(IDPRODUCTO) REFERENCES PRODUCTO(IDPRODUCTO)
+    FOREIGN KEY(IDPEDIDO) REFERENCES pedido(IDPEDIDO),
+    FOREIGN KEY(IDPRODUCTO) REFERENCES producto(IDPRODUCTO)
 )ENGINE=InnoDB;
  
 CREATE TABLE tarjeta(
@@ -86,7 +86,7 @@ CREATE TABLE tarjeta(
     NIP VARCHAR(5),
     TIPO_T VARCHAR(20),
     IDUSUARIO INT(5),
-    FOREIGN KEY(IDUSUARIO) REFERENCES USUARIO(IDUSUARIO)
+    FOREIGN KEY(IDUSUARIO) REFERENCES usuario(IDUSUARIO)
 )ENGINE=InnoDB;
 
 /*Funciones*/
@@ -123,6 +123,23 @@ CREATE PROCEDURE creausuario(IN NOMBRE VARCHAR(20),CONTRASENIA VARCHAR(255),CORR
 BEGIN
 INSERT INTO usuario(NOMBRE_USUARIO,CONTRASENIA,CORREO) VALUES (NOMBRE,CONTRASENIA,CORREO);
 END $$
+DELIMITER $$
+CREATE PROCEDURE actualizaproducto (id int,nombre varchar(100),precio float,cantidad int, marca varchar(15))
+BEGIN
+	UPDATE producto set NOMBRE_P = nombre,PRECIO = precio,CANTIDAD_ALMACEN = cantidad, MARCA = marca WHERE IDPRODUCTO = id;
+END$$
+
+DELIMITER $$
+CREATE PROCEDURE eliminaproducto(id int)
+BEGIN
+	DELETE FROM producto where IDPRODUCTO = id;
+END$$
+
+DELIMITER $$
+CREATE PROCEDURE prodRand ()
+BEGIN
+	SELECT * FROM producto ORDER BY rand() LIMIT 3;
+END$$
 
 DELIMITER $$
 CREATE PROCEDURE administrador(IN correo varchar(25),nombre varchar(25),pass varchar(255))
@@ -193,7 +210,7 @@ END $$
 
 /*Procedimiento creacion pedido*/
 DELIMITER $$
-CREATE PROCEDURE INSERTAPEDIDO(FECHA DATE ,SUBTOTAL FLOAT,TOTAL FLOAT,IDUSUARIO INT(5))
+CREATE PROCEDURE insertapedido(FECHA DATE ,SUBTOTAL FLOAT,TOTAL FLOAT,IDUSUARIO INT(5))
 BEGIN
 	INSERT INTO pedido VALUES(FECHA,SUBTOTAL,TOTAL,IDUSUARIO);
 END $$
@@ -782,107 +799,6 @@ CALL CREAUSUARIO ('Annabelle', 'vKG2T2j0Yvq', 'apickavant2o@addtoany.com');
 CALL CREAUSUARIO ('Katheryn', 'PEKuK2q', 'kkordt2p@apple.com');
 CALL CREAUSUARIO ('Sean', 'E85to85r', 'srodriguez2q@japanpost.jp');
 CALL CREAUSUARIO ('Sergei', '2l4DwK5', 'sleaming2r@cbc.ca');
-
-CALL COMPLETADATOS(1, 'Skip', 'Walburn', 'Bramsen', 'Kentucky', 'Louisville', 'Mesta', 'Glacier Hill', '2018-10-15', '5027833452', 4300, 90, 30);
-CALL COMPLETADATOS(2, 'Quillan', 'Kernar', 'Tedridge', 'Oklahoma', 'Tulsa', 'Holmberg', 'Northland', '2018-10-23', '9185507926', 3346, 28, 69);
-CALL COMPLETADATOS(3, 'Aldwin', 'Bizzey', 'Cruce', 'Texas', 'El Paso', 'Sullivan', 'Graedel', '2018-12-07', '9151528926', 3603, 37, 59);
-CALL COMPLETADATOS(4, 'Nye', 'Lente', 'Yakovlev', 'California', 'San Diego', 'La Follette', 'Spohn', '2019-06-06', '6191092784', 5772, 82, 43);
-CALL COMPLETADATOS(5, 'Nannette', 'Visick', 'Pooly', 'Minnesota', 'Minneapolis', 'Stuart', '5th', '2018-11-17', '6121977134', 7485, 77, 51);
-CALL COMPLETADATOS(6, 'Boycie', 'Capelow', 'Greiswood', 'Illinois', 'Springfield', 'Spohn', 'Superior', '2019-03-28', '2177321393', 5804, 21, 11);
-CALL COMPLETADATOS(7, 'Englebert', 'Scolts', 'Voff', 'Idaho', 'Boise', 'Schiller', 'Moose', '2019-01-22', '2089299642', 8032, 40, 83);
-CALL COMPLETADATOS(8, 'Berkley', 'Simes', 'Boutwell', 'Nevada', 'Las Vegas', 'Clove', 'Lerdahl', '2019-02-19', '7027422608', 6575, 98, 53);
-CALL COMPLETADATOS(9, 'Sholom', 'Nafziger', 'Spottiswood', 'New York', 'New York City', 'Eggendart', 'Dahle', '2018-08-25', '2121351395', 6554, 40, 43);
-CALL COMPLETADATOS(10, 'Forrest', 'Loy', 'Coplestone', 'Michigan', 'Farmington', 'Carey', 'Brown', '2019-01-17', '2481280631', 8046, 21, 6);
-CALL COMPLETADATOS(11, 'Rebekah', 'Gracewood', 'Baldree', 'California', 'San Diego', 'Gina', '1st', '2019-05-11', '6191895025', 3202, 18, 47);
-CALL COMPLETADATOS(12, 'Veradis', 'Schafer', 'Niesegen', 'Mississippi', 'Columbus', 'West', 'Thompson', '2019-07-19', '6624224122', 5960, 85, 56);
-CALL COMPLETADATOS(13, 'Eal', 'Whitington', 'Cady', 'Texas', 'El Paso', 'Gale', 'Clyde Gallagher', '2018-09-13', '9159495638', 8949, 24, 12);
-CALL COMPLETADATOS(14, 'Dru', 'a', 'a', 'District of Columbia', 'Washington', 'American', 'Milwaukee', '2019-03-19', '2021426798', 8152, 57, 65);
-CALL COMPLETADATOS(15, 'Misty', 'todor', 'Fruchon', 'Florida', 'Tallahassee', 'Donald', 'Lawn', '2018-10-26', '8509360449', 3261, 37, 82);
-CALL COMPLETADATOS(16, 'Gill', 'Creus', 'Marney', 'Oregon', 'Portland', '4th', 'Magdeline', '2018-09-14', '5031738065', 7102, 8, 93);
-CALL COMPLETADATOS(17, 'Nariko', 'Hebden', 'Shird', 'California', 'San Diego', 'Mayer', 'Lyons', '2019-06-22', '6195553131', 4680, 74, 30);
-CALL COMPLETADATOS(18, 'Derby', 'Matusson', 'Mitchelson', 'Texas', 'Austin', 'Ohio', 'Swallow', '2018-11-02', '5124346175', 3253, 53, 50);
-CALL COMPLETADATOS(19, 'Audrey', 'Tales', 'Blinde', 'California', 'Pasadena', 'Novick', 'Crowley', '2019-05-17', '6268484199', 6462, 92, 26);
-CALL COMPLETADATOS(20, 'Chip', 'Aviss', 'Mallia', 'Ohio', 'Dayton', 'Pearson', 'Eastwood', '2019-06-18', '9377485636', 3580, 22, 91);
-CALL COMPLETADATOS(21, 'Odell', 'Hindhaugh', 'Roelvink', 'California', 'South Lake Tahoe', 'Roxbury', 'Continental', '2018-08-09', '5309647597', 8923, 59, 11);
-CALL COMPLETADATOS(22, 'Ginelle', 'Mellsop', 'Tyrone', 'California', 'San Jose', 'Manufacturers', 'Sauthoff', '2019-01-16', '4086583955', 7280, 93, 37);
-CALL COMPLETADATOS(23, 'Hestia', 'Canfield', 'Duckels', 'Florida', 'Sarasota', 'Graceland', 'Ilene', '2019-06-12', '9413833232', 8611, 47, 86);
-CALL COMPLETADATOS(24, 'Giraud', 'Kopmann', 'Lotze', 'Texas', 'Houston', 'Garrison', 'Lotheville', '2018-09-06', '2815806079', 5286, 88, 35);
-CALL COMPLETADATOS(25, 'Perri', 'Stolz', 'Swanbourne', 'District of Columbia', 'Washington', 'Sutherland', 'Crescent Oaks', '2018-08-07', '2028838489', 4761, 82, 74);
-CALL COMPLETADATOS(26, 'Felicia', 'Edgin', 'Luis', 'Indiana', 'Indianapolis', 'Bunker Hill', 'Commercial', '2018-08-02', '7659251087', 7881, 44, 79);
-CALL COMPLETADATOS(27, 'Dorri', 'Caffrey', 'Jannasch', 'Nebraska', 'Lincoln', 'Warrior', 'Fairfield', '2018-07-28', '4023810304', 5753, 45, 10);
-CALL COMPLETADATOS(28, 'Carley', 'Sewart', 'Zecchi', 'Colorado', 'Pueblo', 'Bonner', 'Superior', '2018-08-04', '7198363907', 4427, 36, 28);
-CALL COMPLETADATOS(29, 'Rayner', 'Shafier', 'McHarry', 'Tennessee', 'Memphis', 'Birchwood', 'Iowa', '2019-05-25', '9017762256', 4767, 9, 7);
-CALL COMPLETADATOS(30, 'Kala', 'Frise', 'Paolone', 'California', 'San Francisco', 'Muir', 'Delladonna', '2019-04-20', '4157578559', 6377, 60, 60);
-CALL COMPLETADATOS(31, 'Gilda', 'Ludye', 'Bentame', 'Washington', 'Vancouver', 'Sommers', 'Schmedeman', '2019-04-04', '3605683230', 4248, 56, 91);
-CALL COMPLETADATOS(32, 'Finn', 'Draco', 'McGeraghty', 'Virginia', 'Chesapeake', 'Waywood', 'Heath', '2019-05-21', '7572381729', 8921, 98, 19);
-CALL COMPLETADATOS(33, 'Kamillah', 'Longwood', 'Halson', 'Minnesota', 'Saint Paul', '7th', 'Melrose', '2018-10-23', '6123481898', 5100, 94, 37);
-CALL COMPLETADATOS(34, 'Leesa', 'Tute', 'Joust', 'Virginia', 'Springfield', 'Garrison', 'Hanover', '2019-05-13', '5717283284', 7066, 19, 32);
-CALL COMPLETADATOS(35, 'Giffy', 'Bim', 'Applebee', 'Florida', 'Fort Lauderdale', 'Swallow', 'Kropf', '2018-09-25', '9547203473', 6924, 42, 86);
-CALL COMPLETADATOS(36, 'Darrick', 'Reder', 'Frape', 'Oregon', 'Portland', 'Hansons', 'Fuller', '2018-11-11', '5031828275', 5874, 19, 72);
-CALL COMPLETADATOS(37, 'Ari', 'Aleixo', 'Husher', 'New York', 'Albany', 'Ronald Regan', 'Duke', '2019-07-07', '5189492473', 3897, 83, 73);
-CALL COMPLETADATOS(38, 'Karon', 'Elphinstone', 'Waplinton', 'California', 'San Jose', 'Carberry', 'Hanover', '2019-06-06', '4089728983', 7446, 88, 41);
-CALL COMPLETADATOS(39, 'Gabriel', 'Borrowman', 'Cursons', 'Connecticut', 'New Haven', 'Arrowood', 'West', '2018-07-23', '2035985040', 7567, 80, 71);
-CALL COMPLETADATOS(40, 'Alphonse', 'Tripony', 'Tummons', 'New York', 'Albany', 'Sullivan', 'Stone Corner', '2019-01-17', '5186545536', 4251, 96, 52);
-CALL COMPLETADATOS(41, 'Janna', 'Graine', 'Warbeys', 'Illinois', 'Rockford', 'Pond', 'Cardinal', '2019-03-08', '8156784135', 7502, 5, 93);
-CALL COMPLETADATOS(42, 'Kristoffer', 'Lattka', 'Setterthwait', 'Massachusetts', 'Boston', 'School', 'Westridge', '2018-12-07', '6172215261', 8760, 29, 45);
-CALL COMPLETADATOS(43, 'Davy', 'Schops', 'Yong', 'Mississippi', 'Jackson', 'Sommers', 'Hanson', '2018-08-06', '6011102652', 8542, 7, 53);
-CALL COMPLETADATOS(44, 'Talia', 'Timlett', 'Pache', 'Georgia', 'Atlanta', 'Ludington', '6th', '2018-10-18', '4042766689', 3532, 3, 67);
-CALL COMPLETADATOS(45, 'Marlo', 'Ivan', 'Harce', 'Texas', 'Dallas', 'Norway Maple', 'Evergreen', '2019-02-18', '2148742977', 7346, 25, 94);
-CALL COMPLETADATOS(46, 'Hurleigh', 'Kyngdon', 'Mardling', 'Michigan', 'Flint', 'Rieder', 'Manufacturers', '2018-09-11', '8106777316', 6362, 32, 72);
-CALL COMPLETADATOS(47, 'Viki', 'Stayte', 'Mylan', 'Alabama', 'Montgomery', 'Kingsford', 'Sullivan', '2018-08-25', '3344011808', 8330, 15, 20);
-CALL COMPLETADATOS(48, 'Caryl', 'Lammerding', 'Bonsey', 'Texas', 'Amarillo', 'Harper', 'Paget', '2019-04-09', '8068216557', 7585, 6, 98);
-CALL COMPLETADATOS(49, 'Catlee', 'Terrett', 'Nehls', 'North Carolina', 'Gastonia', 'Express', 'Carpenter', '2018-11-03', '7047915388', 3628, 39, 74);
-CALL COMPLETADATOS(50, 'Chester', 'Stannett', 'De Bernardis', 'Alabama', 'Montgomery', 'Merrick', 'Lakeland', '2019-05-23', '3346166421', 6565, 47, 61);
-CALL COMPLETADATOS(51, 'Roberto', 'Keune', 'Frazer', 'New York', 'Brooklyn', 'Corscot', 'Becker', '2019-03-08', '7189623945', 4562, 32, 17);
-CALL COMPLETADATOS(52, 'Grier', 'Martynikhin', 'Fright', 'Florida', 'Lake Worth', 'Paget', 'Monterey', '2018-11-16', '5619577457', 7302, 87, 39);
-CALL COMPLETADATOS(53, 'Hillie', 'Cureton', 'Chetham', 'Texas', 'Longview', 'Pearson', 'Karstens', '2019-02-08', '9033370281', 3551, 20, 46);
-CALL COMPLETADATOS(54, 'Jaine', 'Sutehall', 'Toor', 'Virginia', 'Richmond', 'Northridge', 'Michigan', '2019-04-06', '8045342246', 6432, 12, 39);
-CALL COMPLETADATOS(55, 'Ruthie', 'Cracie', 'Woonton', 'Kansas', 'Shawnee Mission', 'Corry', 'Beilfuss', '2019-01-21', '9136732981', 3602, 26, 73);
-CALL COMPLETADATOS(56, 'Colet', 'Ludron', 'Sellar', 'Florida', 'Tampa', 'Carioca', 'Hanover', '2019-07-07', '8135262440', 4056, 23, 26);
-CALL COMPLETADATOS(57, 'Cissy', 'Tourle', 'Keward', 'Nevada', 'Sparks', 'Fordem', 'Laurel', '2018-08-14', '7754060521', 5811, 52, 84);
-CALL COMPLETADATOS(58, 'Odelinda', 'Wormald', 'Burchett', 'South Dakota', 'Sioux Falls', 'Sycamore', 'Lakewood Gardens', '2018-12-10', '6052746197', 6217, 42, 42);
-CALL COMPLETADATOS(59, 'Kelcie', 'Tomini', 'Gencke', 'Texas', 'Houston', 'Miller', 'Graceland', '2018-09-03', '8328392590', 5785, 11, 83);
-CALL COMPLETADATOS(60, 'Jacquenette', 'Chilver', 'Fazan', 'California', 'Sacramento', 'Toban', 'Monument', '2019-03-06', '9163535598', 7438, 93, 89);
-CALL COMPLETADATOS(61, 'Putnem', 'Ferrone', 'Peppard', 'Nevada', 'Las Vegas', 'Ridgeway', 'Delladonna', '2019-05-12', '7023142088', 5675, 91, 14);
-CALL COMPLETADATOS(62, 'Venus', 'McGreay', 'Farens', 'Indiana', 'Anderson', 'Valley Edge', 'Fulton', '2018-11-15', '7651959203', 5330, 29, 82);
-CALL COMPLETADATOS(63, 'Amalle', 'Hacker', 'Feyer', 'Florida', 'Pensacola', 'Anderson', 'Melrose', '2018-10-27', '8507975087', 7887, 19, 34);
-CALL COMPLETADATOS(64, 'Suki', 'Beedell', 'Hauxley', 'New York', 'Syracuse', 'Debra', 'Canary', '2019-05-23', '3155266806', 4252, 10, 27);
-CALL COMPLETADATOS(65, 'Charley', 'M''Quhan', 'Grahl', 'New York', 'New York City', 'Luster', 'Tomscot', '2018-07-22', '6461597363', 8549, 46, 46);
-CALL COMPLETADATOS(66, 'Chaunce', 'Nys', 'Ebbrell', 'Washington', 'Spokane', 'Stang', 'Victoria', '2018-11-03', '5091701244', 8299, 80, 75);
-CALL COMPLETADATOS(67, 'Britt', 'Matis', 'Thayre', 'Florida', 'Orlando', 'Gale', 'Mockingbird', '2019-05-15', '9543849354', 8958, 52, 99);
-CALL COMPLETADATOS(68, 'Giacobo', 'Straniero', 'Maddock', 'Iowa', 'Davenport', 'Nelson', 'Algoma', '2018-10-24', '5633513037', 5051, 19, 6);
-CALL COMPLETADATOS(69, 'Candis', 'Treffry', 'Sweetzer', 'Georgia', 'Atlanta', 'Packers', 'Forest', '2019-06-07', '6781928535', 6188, 71, 28);
-CALL COMPLETADATOS(70, 'Garvey', 'Ryall', 'Lewing', 'Texas', 'San Antonio', 'Maywood', 'Brickson Park', '2018-09-21', '2107578738', 5428, 70, 91);
-CALL COMPLETADATOS(71, 'Hatty', 'Heathcoat', 'Ausher', 'Ohio', 'Columbus', 'Blackbird', 'Lillian', '2019-05-26', '6141625110', 7424, 61, 38);
-CALL COMPLETADATOS(72, 'Krispin', 'Wheaton', 'Moehle', 'Texas', 'Huntsville', 'Clove', 'Mallard', '2018-12-26', '9361388778', 4119, 46, 2);
-CALL COMPLETADATOS(73, 'Caresa', 'Ganders', 'Box', 'California', 'San Diego', 'Killdeer', 'Scott', '2019-04-23', '6191700431', 5531, 51, 79);
-CALL COMPLETADATOS(74, 'Michell', 'Carbert', 'Cooney', 'California', 'San Francisco', 'North', 'Dixon', '2018-10-03', '4153800397', 3867, 83, 84);
-CALL COMPLETADATOS(75, 'Rodina', 'Archer', 'Domelow', 'New York', 'Rochester', 'Ridgeview', 'Westport', '2018-12-02', '5858926575', 5803, 95, 58);
-CALL COMPLETADATOS(76, 'Desiri', 'Casaccio', 'Le Fleming', 'Florida', 'Panama City', 'Carpenter', 'Surrey', '2019-01-02', '8502878762', 7466, 71, 11);
-CALL COMPLETADATOS(77, 'Quincy', 'Armfirld', 'Housego', 'Massachusetts', 'Boston', 'Pleasure', 'Bayside', '2019-05-27', '6177711391', 3090, 79, 37);
-CALL COMPLETADATOS(78, 'Robin', 'Illing', 'MacPaden', 'Connecticut', 'Stamford', 'Carioca', 'Miller', '2019-07-19', '2037124424', 7896, 85, 45);
-CALL COMPLETADATOS(79, 'Poul', 'Jearum', 'Braz', 'Colorado', 'Denver', 'Jay', 'Talmadge', '2019-03-13', '3034337102', 8578, 96, 52);
-CALL COMPLETADATOS(80, 'Bert', 'Breeder', 'Bianco', 'Alabama', 'Birmingham', 'Clemons', 'Maywood', '2019-02-02', '2055532897', 4902, 55, 8);
-CALL COMPLETADATOS(81, 'Isidoro', 'Rosekilly', 'Auger', 'Nebraska', 'Omaha', 'Banding', 'Derek', '2019-03-05', '7127469182', 4712, 53, 84);
-CALL COMPLETADATOS(82, 'Allistir', 'Lilloe', 'Brodnecke', 'Connecticut', 'New Haven', 'Butterfield', 'Londonderry', '2019-02-11', '2033627716', 7302, 25, 2);
-CALL COMPLETADATOS(83, 'Trumaine', 'Nemchinov', 'Grinnov', 'North Carolina', 'Charlotte', 'Kinsman', 'Pawling', '2019-07-08', '7041172394', 4604, 91, 65);
-CALL COMPLETADATOS(84, 'Mercie', 'Pedwell', 'Hannah', 'California', 'San Francisco', 'Quincy', 'Clyde Gallagher', '2019-04-07', '4151428274', 3733, 36, 1);
-CALL COMPLETADATOS(85, 'Ann-marie', 'Montrose', 'Linder', 'Texas', 'Dallas', 'Shopko', 'Oak', '2018-12-25', '2148938910', 8071, 99, 20);
-CALL COMPLETADATOS(86, 'Hanan', 'Robathon', 'Doers', 'Florida', 'Miami', 'Carey', 'Riverside', '2018-12-31', '7868118193', 4087, 85, 38);
-CALL COMPLETADATOS(87, 'Boyce', 'Vamplew', 'Stookes', 'South Carolina', 'Charleston', 'Forest Dale', 'Eagan', '2018-12-26', '8436686562', 4803, 4, 45);
-CALL COMPLETADATOS(88, 'Heindrick', 'Sills', 'Frontczak', 'Massachusetts', 'Boston', 'Golf', 'Forest Dale', '2019-06-19', '6175357987', 7503, 10, 99);
-CALL COMPLETADATOS(89, 'Goddard', 'Doddemeede', 'Stickles', 'California', 'Sacramento', 'Arizona', 'North', '2019-05-31', '9168682719', 4750, 37, 20);
-CALL COMPLETADATOS(90, 'Ora', 'Fouldes', 'Rieflin', 'Louisiana', 'Lafayette', 'Burrows', 'Mayer', '2018-09-09', '3375588792', 3329, 5, 92);
-CALL COMPLETADATOS(91, 'Silvie', 'Andrea', 'Killingbeck', 'Delaware', 'Newark', 'Grim', 'Park Meadow', '2019-03-03', '3022797735', 7142, 19, 100);
-CALL COMPLETADATOS(92, 'Letta', 'Wildey', 'Crusham', 'Florida', 'Fort Lauderdale', 'Brickson Park', 'Cody', '2018-08-07', '7549023325', 6595, 27, 38);
-CALL COMPLETADATOS(93, 'Patrice', 'Dickson', 'Hassen', 'Oklahoma', 'Oklahoma City', 'Amoth', 'Clyde Gallagher', '2019-03-22', '4054596183', 3301, 38, 30);
-CALL COMPLETADATOS(94, 'Lenee', 'Spalding', 'Conkling', 'Texas', 'Denton', 'Evergreen', 'Tennessee', '2019-06-23', '9406096564', 5238, 41, 27);
-CALL COMPLETADATOS(95, 'Christy', 'Wagge', 'Sowersby', 'Ohio', 'Cincinnati', 'Hazelcrest', 'Beilfuss', '2018-10-04', '5139156534', 6030, 65, 6);
-CALL COMPLETADATOS(96, 'Timmie', 'Sleeman', 'Talkington', 'Minnesota', 'Young America', 'Harbort', 'Main', '2019-03-07', '9527317539', 7343, 92, 50);
-CALL COMPLETADATOS(97, 'Marjorie', 'Alfonso', 'Poad', 'Indiana', 'South Bend', 'Di Loreto', 'Springview', '2019-06-03', '5746933082', 8388, 4, 13);
-CALL COMPLETADATOS(98, 'Sula', 'Triplet', 'Juarez', 'Indiana', 'Fort Wayne', 'Monument', 'Kinsman', '2018-11-14', '2602190377', 4032, 18, 29);
-CALL COMPLETADATOS(99, 'Lorine', 'Kydd', 'Hoolaghan', 'Florida', 'Port Saint Lucie', 'Monterey', 'Acker', '2019-03-19', '7724668452', 6492, 14, 47);
-CALL COMPLETADATOS(100, 'Ingeborg', 'Jermyn', 'Moultrie', 'Indiana', 'Fort Wayne', 'Cambridge', 'Gale', '2018-11-20', '2606611659', 4844, 95, 45); 
 
 CALL INSERTATARJETA(1, 'Roderick', 'Fawdrey', 'Loding', '5010122541263926', 442, 'mastercard', 1);
 CALL INSERTATARJETA(2, 'Berenice', 'Stukings', 'Mann', '6767637500569729161', 186, 'solo', 2);

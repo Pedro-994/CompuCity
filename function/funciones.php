@@ -164,7 +164,7 @@
 
         $p_cat_id = $_GET['id_cat'];
         
-        $get_products ="SELECT * FROM producto where IDCATEGORIA='$p_cat_id'";
+        $get_products ="SELECT * FROM producto where IDCATEGORIA='$p_cat_id' and ESTADO = 'Disponible'";
         
         $run_products = mysqli_query($db,$get_products);
         

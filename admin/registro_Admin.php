@@ -1,8 +1,6 @@
 <?php
     include("includes/header.php");
-    if(!isset($_SESSION['NOMBREA'])){
-        echo "<script>window.open('index.php','_self')</script>";
-    }
+
 ?>
 <div class="container">
     <div class="row">
