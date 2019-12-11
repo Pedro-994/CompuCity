@@ -1,20 +1,27 @@
 <?php include("includes/DB.php"); ?>
 
-<?php include('includes/header.php'); ?>
+<?php
+    include("includes/header.php");
+        if(!isset($_SESSION['NOMBREA'])){
+        echo "<script>window.open('index.php','_self')</script>";
+    }
 
-<main class="container p-4">
-  <div class="row">
-    <div class="col-md-4">
-      <?php include("insertaproducto.php");?>
+?>
+<div class="row">
+<div class="col-lg-12">
+  <div class="card mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
     </div>
-    <div class="col-md-8">
-      <table class="table table-bordered">
-        <thead>
+    <div class="table-responsive p-3">
+      <table class="table align-items-center table-flush" id="dataTable">
+        <thead class="thead-light">
           <tr>
             <th>Idproducto</th>
             <th>Nombreproducto</th>
             <th>Precio</th>
             <th>Estado</th>
+            <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -29,16 +36,10 @@
             <td> $ <?php echo $row['PRECIO']; ?></td>
             <td><?php echo $row['ESTADO']; ?></td>
             <td>
-              <a
-                href="edit.php?id=<?php echo $row['IDPRODUCTO']?>"
-                class="btn btn-secondary"
-              >
+              <a href="edit.php?id=<?php echo $row['IDPRODUCTO']?>" class="btn btn-secondary">
                 <i class="fas fa-marker"></i>
               </a>
-              <a
-                href="delete.php?id=<?php echo $row['IDPRODUCTO']?>"
-                class="btn btn-danger"
-              >
+              <a href="delete.php?id=<?php echo $row['IDPRODUCTO']?>" class="btn btn-danger">
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>
@@ -48,4 +49,26 @@
       </table>
     </div>
   </div>
-</main>
+</div>
+</div>
+
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery-easing/jq  uery.easing.min.js"></script>
+<script src="js/ruang-admin.min.js"></script>
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script>
+  $(document).ready(function () {
+    $('#dataTable').DataTable(); // ID From dataTable 
+    $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+  });
+</script>
+
+</body>
+
+</html>

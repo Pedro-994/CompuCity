@@ -1,3 +1,12 @@
+<?php include("includes/DB.php"); ?>
+
+<?php
+    include("includes/header.php");
+        if(!isset($_SESSION['NOMBREA'])){
+        echo "<script>window.open('index.php','_self')</script>";
+    }
+
+?>
 <div class="card">
         <div class="card-header">
             <h3 class="card-title">
@@ -134,4 +143,8 @@
             echo "<script>alert('No se pudo agregar producto')</script>";
         }
     }
+?>
+
+<?php
+include("includes/footer.php");
 ?>
